@@ -1,0 +1,171 @@
+﻿@model FinalProject.Models.Technician
+
+@{
+    ViewData["Title"] = "Add Technician";
+}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+    <div class="d-flex align-items-center mb-4">
+
+        <div class="page-icon me-3">
+            <i class="bi bi-person-plus"></i>
+        </div>
+
+        <div>
+            <h2 class="fw-bold mb-1">
+                Add New Technician
+            </h2>
+
+            <p class="text-muted mb-0">
+                Add a technician and their work information.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Form -->
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card form-card border-0">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <form asp-action="Create" method="post">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+
+                        <!-- Technician Name -->
+                        <div class="mb-4">
+
+                            <label asp-for="Name"
+                                   class="form-label fw-semibold">
+
+                                Technician Name
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-person"></i>
+                                </span>
+
+                                <input asp-for="Name"
+                                       class="form-control"
+                                       placeholder="Enter technician name" />
+
+                            </div>
+
+                            <span asp-validation-for="Name"
+                                  class="text-danger small">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Phone -->
+                        <div class="mb-4">
+
+                            <label asp-for="Phone"
+                                   class="form-label fw-semibold">
+
+                                Phone Number
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-telephone"></i>
+                                </span>
+
+                                <input asp-for="Phone"
+                                       class="form-control"
+                                       placeholder="Enter phone number" />
+
+                            </div>
+
+                            <span asp-validation-for="Phone"
+                                  class="text-danger small">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Specialization -->
+                        <div class="mb-4">
+
+                            <label asp-for="Specialization"
+                                   class="form-label fw-semibold">
+
+                                Specialization
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-tools"></i>
+                                </span>
+
+                                <input asp-for="Specialization"
+                                       class="form-control"
+                                       placeholder="e.g. Laptop Repair, Mobile Repair" />
+
+                            </div>
+
+                            <span asp-validation-for="Specialization"
+                                  class="text-danger small">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Buttons -->
+                        <div class="d-flex flex-column flex-sm-row
+                                    justify-content-between
+                                    gap-3 mt-4 pt-4 border-top">
+
+                            <a asp-action="Index"
+                               class="btn btn-light px-4">
+
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Back to Technicians
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-primary px-4">
+
+                                <i class="bi bi-check-lg me-2"></i>
+                                Save Technician
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

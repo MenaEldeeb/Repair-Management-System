@@ -1,0 +1,220 @@
+﻿
+@model FinalProject.Models.Payment
+
+@{
+    ViewData["Title"] = "Delete Payment";
+}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+
+        <div class="page-icon mx-auto mb-3">
+            <i class="bi bi-trash"></i>
+        </div>
+
+        <h2 class="fw-bold mb-1">
+            Delete Payment
+        </h2>
+
+        <p class="text-muted mb-0">
+            Remove this payment from the system.
+        </p>
+
+    </div>
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-xl-8 col-lg-9">
+
+            <div class="card form-card border-0">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <!-- Warning -->
+
+                    <div class="alert alert-danger d-flex align-items-center mb-4">
+
+                        <i class="bi bi-exclamation-triangle-fill me-3 fs-4"></i>
+
+                        <div>
+                            <strong>Are you sure?</strong>
+                            <br />
+                            This payment will be permanently deleted.
+                        </div>
+
+                    </div>
+
+
+                    <!-- Payment Information -->
+
+                    <div class="section-title mb-4">
+
+                        <div class="section-number">
+                            01
+                        </div>
+
+                        <div>
+                            <h5 class="mb-0">
+                                Payment Information
+                            </h5>
+
+                            <small class="text-muted">
+                                Information about the payment you are deleting
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row g-4 mb-4">
+
+                        <!-- Payment ID -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    Payment ID
+                                </small>
+
+                                <span class="fw-semibold">
+                                    #@Model.PaymentId
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Repair Order -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-tools me-1"></i>
+                                    Repair Order
+                                </small>
+
+                                <span class="fw-semibold">
+                                    Repair Order #@Model.RepairOrderId
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Amount -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-cash-stack me-1"></i>
+                                    Amount
+                                </small>
+
+                                <span class="fw-semibold text-success">
+                                    @Model.Amount.ToString("0.00")
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Payment Method -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-wallet2 me-1"></i>
+                                    Payment Method
+                                </small>
+
+                                <span class="badge bg-primary">
+                                    @Model.PaymentMethod
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Payment Date -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    Payment Date
+                                </small>
+
+                                <span class="fw-semibold">
+                                    @Model.PaymentDate.ToString("dd/MM/yyyy")
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Buttons -->
+
+                    <form asp-action="DeleteConfirmed"
+                          method="post">
+
+                        <input type="hidden"
+                               name="id"
+                               value="@Model.PaymentId" />
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="d-flex flex-column flex-sm-row
+                                    justify-content-between
+                                    gap-3 mt-4 pt-4 border-top">
+
+                            <a asp-action="Index"
+                               class="btn btn-light px-4">
+
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Cancel
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-danger px-4">
+
+                                <i class="bi bi-trash me-2"></i>
+                                Delete Payment
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+

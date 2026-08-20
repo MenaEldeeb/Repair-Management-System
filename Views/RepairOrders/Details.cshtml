@@ -1,0 +1,347 @@
+﻿@model FinalProject.Models.RepairOrder
+
+@{
+    ViewData["Title"] = "Repair Order Details";
+}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+
+        <div class="page-icon mx-auto mb-3">
+            <i class="bi bi-tools"></i>
+        </div>
+
+        <h2 class="fw-bold mb-1">
+            Repair Order Details
+        </h2>
+
+        <p class="text-muted mb-0">
+            View repair order information.
+        </p>
+
+    </div>
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-xl-9 col-lg-10">
+
+            <div class="card form-card border-0">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <!-- Order Header -->
+
+                    <div class="text-center mb-5">
+
+                        <div class="customer-avatar mx-auto mb-3"
+                             style="width:80px;height:80px;font-size:30px;">
+
+                            <i class="bi bi-tools"></i>
+
+                        </div>
+
+                        <h3 class="fw-bold mb-1">
+                            Repair Order #@Model.RepairOrderId
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            @Model.Status
+                        </p>
+
+                    </div>
+
+
+                    <!-- Repair Information -->
+
+                    <div class="section-title mb-4">
+
+                        <div class="section-number">
+                            01
+                        </div>
+
+                        <div>
+                            <h5 class="mb-0">
+                                Repair Information
+                            </h5>
+
+                            <small class="text-muted">
+                                Device and technician information
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row g-4 mb-5">
+
+                        <!-- Device -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-laptop me-1"></i>
+                                    Device
+                                </small>
+
+                                @if (Model.Device != null)
+                                {
+                                        <span class="fw-semibold">
+                                        @Model.Device.DeviceName
+                                        </span>
+                                }
+                                else
+                                {
+                                        <span class="text-muted">
+                                            No Device
+                                        </span>
+                                }
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Technician -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-person-gear me-1"></i>
+                                    Technician
+                                </small>
+
+                                @if (Model.Technician != null)
+                                {
+                                        <span class="fw-semibold">
+                                        @Model.Technician.Name
+                                        </span>
+                                }
+                                else
+                                {
+                                        <span class="text-muted">
+                                            No Technician
+                                        </span>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Dates & Status -->
+
+                    <div class="section-title mb-4">
+
+                        <div class="section-number">
+                            02
+                        </div>
+
+                        <div>
+                            <h5 class="mb-0">
+                                Order Status
+                            </h5>
+
+                            <small class="text-muted">
+                                Dates and current repair status
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row g-4 mb-5">
+
+                        <!-- Receive Date -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    Receive Date
+                                </small>
+
+                                <span class="fw-semibold">
+                                    @Model.ReceiveDate.ToString("dd/MM/yyyy")
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Delivery Date -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-calendar-check me-1"></i>
+                                    Delivery Date
+                                </small>
+
+                                @if (Model.DeliveryDate.HasValue)
+                                {
+                                        <span class="fw-semibold">
+                                        @Model.DeliveryDate.Value.ToString("dd/MM/yyyy")
+                                        </span>
+                                }
+                                else
+                                {
+                                        <span class="text-muted">
+                                            Not delivered yet
+                                        </span>
+                                }
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Status -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-clipboard-check me-1"></i>
+                                    Status
+                                </small>
+
+                                @if (Model.Status == "Pending")
+                                {
+                                        <span class="badge bg-warning text-dark">
+                                            Pending
+                                        </span>
+                                }
+                                else if (Model.Status == "In Progress")
+                                {
+                                        <span class="badge bg-info text-dark">
+                                            In Progress
+                                        </span>
+                                }
+                                else if (Model.Status == "Completed")
+                                {
+                                        <span class="badge bg-success">
+                                            Completed
+                                        </span>
+                                }
+                                else
+                                {
+                                        <span class="badge bg-secondary">
+                                        @Model.Status
+                                        </span>
+                                }
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Cost -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-currency-dollar me-1"></i>
+                                    Cost
+                                </small>
+
+                                <span class="fw-semibold">
+                                    @Model.Cost.ToString("0.00")
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Description -->
+
+                    <div class="section-title mb-4">
+
+                        <div class="section-number">
+                            03
+                        </div>
+
+                        <div>
+                            <h5 class="mb-0">
+                                Problem Description
+                            </h5>
+
+                            <small class="text-muted">
+                                Repair issue details
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="p-4 border rounded mb-5">
+
+                        @if (!string.IsNullOrWhiteSpace(Model.Description))
+                        {
+                                <p class="mb-0">
+                                @Model.Description
+                                </p>
+                        }
+                        else
+                        {
+                                <span class="text-muted">
+                                    No description provided.
+                                </span>
+                        }
+
+                    </div>
+
+
+                    <!-- Buttons -->
+
+                    <div class="d-flex flex-column flex-sm-row
+                                justify-content-between
+                                gap-3 pt-4 border-top">
+
+                        <a asp-action="Index"
+                           class="btn btn-light px-4">
+
+                            <i class="bi bi-arrow-left me-2"></i>
+                            Back to Repair Orders
+
+                        </a>
+
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.RepairOrderId"
+                           class="btn btn-warning px-4">
+
+                            <i class="bi bi-pencil-square me-2"></i>
+                            Edit Repair Order
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

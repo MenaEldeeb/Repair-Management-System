@@ -1,0 +1,388 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="dashboard-page">
+
+    <div class="container py-5">
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <div class="dashboard-header mb-5">
+
+            <div>
+
+                <div class="dashboard-label">
+                    REPAIR MANAGEMENT SYSTEM
+                </div>
+
+                <h1>
+                    Welcome back 👋
+                </h1>
+
+                <p>
+                    Manage your repair shop from one simple dashboard.
+                </p>
+
+            </div>
+
+            <a asp-controller="RepairOrders"
+               asp-action="Create"
+               class="dashboard-add-btn">
+
+                <i class="bi bi-plus-lg"></i>
+
+                New Repair Order
+
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             STATISTICS
+        ========================== -->
+
+        <div class="row g-4 mb-4">
+
+            <!-- Customers -->
+
+            <div class="col-12 col-sm-6 col-lg-3">
+
+                <a asp-controller="Customers"
+                   asp-action="Index"
+                   class="stat-card-link">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                CUSTOMERS
+                            </span>
+
+                            <h3>
+                                —
+                            </h3>
+
+                            <small>
+                                Manage customers
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- Devices -->
+
+            <div class="col-12 col-sm-6 col-lg-3">
+
+                <a asp-controller="Devices"
+                   asp-action="Index"
+                   class="stat-card-link">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-laptop"></i>
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                DEVICES
+                            </span>
+
+                            <h3>
+                                —
+                            </h3>
+
+                            <small>
+                                Registered devices
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- Repair Orders -->
+
+            <div class="col-12 col-sm-6 col-lg-3">
+
+                <a asp-controller="RepairOrders"
+                   asp-action="Index"
+                   class="stat-card-link">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-tools"></i>
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                REPAIR ORDERS
+                            </span>
+
+                            <h3>
+                                —
+                            </h3>
+
+                            <small>
+                                Active repair orders
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- Technicians -->
+
+            <div class="col-12 col-sm-6 col-lg-3">
+
+                <a asp-controller="Technicians"
+                   asp-action="Index"
+                   class="stat-card-link">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-person-gear"></i>
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                TECHNICIANS
+                            </span>
+
+                            <h3>
+                                —
+                            </h3>
+
+                            <small>
+                                Repair technicians
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             MANAGEMENT
+        ========================== -->
+
+        <div class="dashboard-card">
+
+            <div class="card-header-custom">
+
+                <h4>
+                    Repair Management
+                </h4>
+
+                <p>
+                    Access the main sections of your system.
+                </p>
+
+            </div>
+
+
+            <div class="management-list">
+
+                <!-- Customers -->
+
+                <a asp-controller="Customers"
+                   asp-action="Index"
+                   class="management-item">
+
+                    <div class="management-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <div class="management-info">
+
+                        <h6>
+                            Customers
+                        </h6>
+
+                        <p>
+                            View and manage customer information
+                        </p>
+
+                    </div>
+
+                    <i class="bi bi-chevron-right arrow"></i>
+
+                </a>
+
+
+                <!-- Devices -->
+
+                <a asp-controller="Devices"
+                   asp-action="Index"
+                   class="management-item">
+
+                    <div class="management-icon">
+                        <i class="bi bi-laptop"></i>
+                    </div>
+
+                    <div class="management-info">
+
+                        <h6>
+                            Devices
+                        </h6>
+
+                        <p>
+                            Manage customer devices and problems
+                        </p>
+
+                    </div>
+
+                    <i class="bi bi-chevron-right arrow"></i>
+
+                </a>
+
+
+                <!-- Technicians -->
+
+                <a asp-controller="Technicians"
+                   asp-action="Index"
+                   class="management-item">
+
+                    <div class="management-icon">
+                        <i class="bi bi-person-gear"></i>
+                    </div>
+
+                    <div class="management-info">
+
+                        <h6>
+                            Technicians
+                        </h6>
+
+                        <p>
+                            Manage technicians and specializations
+                        </p>
+
+                    </div>
+
+                    <i class="bi bi-chevron-right arrow"></i>
+
+                </a>
+
+
+                <!-- Repair Orders -->
+
+                <a asp-controller="RepairOrders"
+                   asp-action="Index"
+                   class="management-item">
+
+                    <div class="management-icon">
+                        <i class="bi bi-tools"></i>
+                    </div>
+
+                    <div class="management-info">
+
+                        <h6>
+                            Repair Orders
+                        </h6>
+
+                        <p>
+                            Track and manage repair operations
+                        </p>
+
+                    </div>
+
+                    <i class="bi bi-chevron-right arrow"></i>
+
+                </a>
+
+
+                <!-- Payments -->
+
+                <a asp-controller="Payments"
+                   asp-action="Index"
+                   class="management-item">
+
+                    <div class="management-icon">
+                        <i class="bi bi-credit-card"></i>
+                    </div>
+
+                    <div class="management-info">
+
+                        <h6>
+                            Payments
+                        </h6>
+
+                        <p>
+                            Manage repair payments and transactions
+                        </p>
+
+                    </div>
+
+                    <i class="bi bi-chevron-right arrow"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             SYSTEM STATUS
+        ========================== -->
+
+        <div class="system-info mt-4">
+
+            <div class="system-info-icon">
+
+                <i class="bi bi-check-lg"></i>
+
+            </div>
+
+            <div>
+
+                <h6>
+                    System Ready
+                </h6>
+
+                <p>
+                    Your repair management system is ready to use.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

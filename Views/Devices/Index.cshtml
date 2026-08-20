@@ -1,0 +1,217 @@
+﻿@model IEnumerable<FinalProject.Models.Device>
+
+@{
+    ViewData["Title"] = "Devices";
+}
+
+<div class="container py-5">
+
+    <div class="d-flex flex-column flex-md-row
+                justify-content-between
+                align-items-md-center
+                mb-4 gap-3">
+
+        <div class="d-flex align-items-center">
+
+            <div class="page-icon me-3">
+                <i class="bi bi-laptop"></i>
+            </div>
+
+            <div>
+                <h2 class="fw-bold mb-1">
+                    Devices
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Manage customer devices and repair information.
+                </p>
+            </div>
+
+        </div>
+
+        <a asp-action="Create"
+           class="btn btn-primary px-4">
+
+            <i class="bi bi-plus-lg me-2"></i>
+            Add Device
+
+        </a>
+
+    </div>
+
+
+    <div class="card form-card border-0">
+
+        <div class="card-body p-0">
+
+            @if (Model != null && Model.Any())
+            {
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle mb-0">
+
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Device</th>
+                                    <th>Type</th>
+                                    <th>Serial Number</th>
+                                    <th>Customer</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                        <tr>
+
+                                            <td>
+                                                <span class="customer-id">
+                                                    #@item.DeviceId
+                                                </span>
+                                            </td>
+
+                                            <td>
+
+                                                <div class="d-flex align-items-center">
+
+                                                    <div class="customer-avatar">
+                                                        <i class="bi bi-laptop"></i>
+                                                    </div>
+
+                                                    <div class="ms-3">
+
+                                                        <div class="fw-semibold">
+                                                    @item.DeviceName
+                                                        </div>
+
+                                                        <small class="text-muted">
+                                                    @item.Problem
+                                                        </small>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </td>
+
+                                            <td>
+                                                <span class="badge bg-primary">
+                                            @item.DeviceType
+                                                </span>
+                                            </td>
+
+                                            <td>
+
+                                        @if (!string.IsNullOrEmpty(item.SerialNumber))
+                                        {
+                                                        <span>
+                                                            <i class="bi bi-upc-scan me-1"></i>
+                                                @item.SerialNumber
+                                                        </span>
+                                        }
+                                        else
+                                        {
+                                                        <span class="text-muted">
+                                                            N/A
+                                                        </span>
+                                        }
+
+                                            </td>
+
+                                            <td>
+
+                                        @if (item.Customer != null)
+                                        {
+                                                        <span class="fw-semibold">
+                                                @item.Customer.Fname
+                                                @item.Customer.Lname
+                                                        </span>
+                                        }
+                                        else
+                                        {
+                                                        <span class="text-muted">
+                                                            No Customer
+                                                        </span>
+                                        }
+
+                                            </td>
+
+                                            <td>
+
+                                                <div class="d-flex justify-content-center gap-2">
+
+                                                    <a asp-action="Details"
+                                                       asp-route-id="@item.DeviceId"
+                                                       class="btn btn-info action-btn">
+
+                                                        <i class="bi bi-eye me-1"></i>
+                                                        Details
+
+                                                    </a>
+
+                                                    <a asp-action="Edit"
+                                                       asp-route-id="@item.DeviceId"
+                                                       class="btn btn-warning action-btn">
+
+                                                        <i class="bi bi-pencil-square me-1"></i>
+                                                        Edit
+
+                                                    </a>
+
+                                                    <a asp-action="Delete"
+                                                       asp-route-id="@item.DeviceId"
+                                                       class="btn btn-danger action-btn">
+
+                                                        <i class="bi bi-trash me-1"></i>
+                                                        Delete
+
+                                                    </a>
+
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+                            }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+            }
+            else
+            {
+                    <div class="text-center py-5">
+
+                        <div class="empty-icon mb-3">
+                            <i class="bi bi-laptop"></i>
+                        </div>
+
+                        <h4 class="fw-bold">
+                            No Devices Found
+                        </h4>
+
+                        <p class="text-muted">
+                            You haven't added any devices yet.
+                        </p>
+
+                        <a asp-action="Create"
+                           class="btn btn-primary px-4">
+
+                            <i class="bi bi-plus-lg me-2"></i>
+                            Add Your First Device
+
+                        </a>
+
+                    </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

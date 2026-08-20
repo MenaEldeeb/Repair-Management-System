@@ -1,0 +1,280 @@
+﻿
+@model FinalProject.Models.Payment
+
+@{
+    ViewData["Title"] = "Payment Details";
+}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+
+        <div class="page-icon mx-auto mb-3">
+            <i class="bi bi-credit-card"></i>
+        </div>
+
+        <h2 class="fw-bold mb-1">
+            Payment Details
+        </h2>
+
+        <p class="text-muted mb-0">
+            View payment information.
+        </p>
+
+    </div>
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-xl-9 col-lg-10">
+
+            <div class="card form-card border-0">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <!-- Payment Header -->
+
+                    <div class="text-center mb-5">
+
+                        <div class="customer-avatar mx-auto mb-3"
+                             style="width:80px;height:80px;font-size:30px;">
+
+                            <i class="bi bi-credit-card"></i>
+
+                        </div>
+
+                        <h3 class="fw-bold mb-1">
+                            Payment #@Model.PaymentId
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            @Model.PaymentMethod
+                        </p>
+
+                    </div>
+
+
+                    <!-- Payment Information -->
+
+                    <div class="section-title mb-4">
+
+                        <div class="section-number">
+                            01
+                        </div>
+
+                        <div>
+                            <h5 class="mb-0">
+                                Payment Information
+                            </h5>
+
+                            <small class="text-muted">
+                                Payment amount and method
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row g-4 mb-5">
+
+                        <!-- Amount -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-cash-stack me-1"></i>
+                                    Amount
+                                </small>
+
+                                <span class="fw-semibold text-success">
+                                    @Model.Amount.ToString("0.00")
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Payment Method -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-wallet2 me-1"></i>
+                                    Payment Method
+                                </small>
+
+                                <span class="badge bg-primary">
+                                    @Model.PaymentMethod
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Repair Order Information -->
+
+                    <div class="section-title mb-4">
+
+                        <div class="section-number">
+                            02
+                        </div>
+
+                        <div>
+                            <h5 class="mb-0">
+                                Repair Order
+                            </h5>
+
+                            <small class="text-muted">
+                                Related repair order information
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row g-4 mb-5">
+
+                        <!-- Repair Order -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-tools me-1"></i>
+                                    Repair Order
+                                </small>
+
+                                <span class="fw-semibold">
+                                    Repair Order #@Model.RepairOrderId
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Payment Date -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    Payment Date
+                                </small>
+
+                                <span class="fw-semibold">
+                                    @Model.PaymentDate.ToString("dd/MM/yyyy")
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Transaction Summary -->
+
+                    <div class="section-title mb-4">
+
+                        <div class="section-number">
+                            03
+                        </div>
+
+                        <div>
+                            <h5 class="mb-0">
+                                Transaction Summary
+                            </h5>
+
+                            <small class="text-muted">
+                                Payment transaction details
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <div class="p-4 border rounded mb-5">
+
+                        <div class="row g-4">
+
+                            <div class="col-md-6">
+
+                                <small class="text-muted d-block mb-2">
+                                    Payment ID
+                                </small>
+
+                                <span class="fw-semibold">
+                                    #@Model.PaymentId
+                                </span>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <small class="text-muted d-block mb-2">
+                                    Status
+                                </small>
+
+                                <span class="badge bg-success">
+                                    Paid
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Buttons -->
+
+                    <div class="d-flex flex-column flex-sm-row
+                                justify-content-between
+                                gap-3 pt-4 border-top">
+
+                        <a asp-action="Index"
+                           class="btn btn-light px-4">
+
+                            <i class="bi bi-arrow-left me-2"></i>
+                            Back to Payments
+
+                        </a>
+
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.PaymentId"
+                           class="btn btn-warning px-4">
+
+                            <i class="bi bi-pencil-square me-2"></i>
+                            Edit Payment
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

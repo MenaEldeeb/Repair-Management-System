@@ -1,0 +1,289 @@
+﻿
+@model FinalProject.Models.Payment
+
+@{
+    ViewData["Title"] = "Add Payment";
+}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+
+        <div class="page-icon mx-auto mb-3">
+            <i class="bi bi-credit-card"></i>
+        </div>
+
+        <h2 class="fw-bold mb-1">
+            Add New Payment
+        </h2>
+
+        <p class="text-muted mb-0">
+            Record a new payment for a repair order.
+        </p>
+
+    </div>
+
+
+    <div class="row justify-content-center">
+
+        <div class="col-xl-8 col-lg-9">
+
+            <div class="card form-card border-0">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <form asp-action="Create" method="post">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="alert alert-danger">
+                        </div>
+
+
+                        <!-- Payment Information -->
+
+                        <div class="section-title mb-4">
+
+                            <div class="section-number">
+                                01
+                            </div>
+
+                            <div>
+                                <h5 class="mb-0">
+                                    Payment Information
+                                </h5>
+
+                                <small class="text-muted">
+                                    Select the repair order and enter payment details
+                                </small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <!-- Repair Order -->
+
+                            <div class="col-md-6 mb-4">
+
+                                <label asp-for="RepairOrderId"
+                                       class="form-label fw-semibold">
+
+                                    Repair Order
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+                                        <i class="bi bi-tools"></i>
+                                    </span>
+
+                                    <select asp-for="RepairOrderId"
+                                            class="form-select"
+                                            asp-items="@(new SelectList(ViewBag.RepairOrders, "RepairOrderId", "RepairOrderId"))">
+
+                                        <option value="">
+                                            -- Select Repair Order --
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                <span asp-validation-for="RepairOrderId"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+
+                            <!-- Payment Method -->
+
+                            <div class="col-md-6 mb-4">
+
+                                <label asp-for="PaymentMethod"
+                                       class="form-label fw-semibold">
+
+                                    Payment Method
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+                                        <i class="bi bi-wallet2"></i>
+                                    </span>
+
+                                    <select asp-for="PaymentMethod"
+                                            class="form-select">
+
+                                        <option value="">
+                                            -- Select Payment Method --
+                                        </option>
+
+                                        <option value="Cash">
+                                            Cash
+                                        </option>
+
+                                        <option value="Visa">
+                                            Visa
+                                        </option>
+
+                                        <option value="MasterCard">
+                                            MasterCard
+                                        </option>
+
+                                        <option value="Bank Transfer">
+                                            Bank Transfer
+                                        </option>
+
+                                        <option value="Wallet">
+                                            Wallet
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                <span asp-validation-for="PaymentMethod"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Payment Details -->
+
+                        <div class="section-title mb-4 mt-2">
+
+                            <div class="section-number">
+                                02
+                            </div>
+
+                            <div>
+                                <h5 class="mb-0">
+                                    Payment Details
+                                </h5>
+
+                                <small class="text-muted">
+                                    Enter the payment amount and date
+                                </small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <!-- Amount -->
+
+                            <div class="col-md-6 mb-4">
+
+                                <label asp-for="Amount"
+                                       class="form-label fw-semibold">
+
+                                    Amount
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+                                        <i class="bi bi-cash-stack"></i>
+                                    </span>
+
+                                    <input asp-for="Amount"
+                                           type="number"
+                                           step="0.01"
+                                           min="0"
+                                           class="form-control"
+                                           placeholder="Enter payment amount" />
+
+                                </div>
+
+                                <span asp-validation-for="Amount"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+
+                            <!-- Payment Date -->
+
+                            <div class="col-md-6 mb-4">
+
+                                <label asp-for="PaymentDate"
+                                       class="form-label fw-semibold">
+
+                                    Payment Date
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+                                        <i class="bi bi-calendar3"></i>
+                                    </span>
+
+                                    <input asp-for="PaymentDate"
+                                           type="datetime-local"
+                                           class="form-control" />
+
+                                </div>
+
+                                <span asp-validation-for="PaymentDate"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Buttons -->
+
+                        <div class="d-flex flex-column flex-sm-row
+                                    justify-content-between
+                                    gap-3 mt-4 pt-4 border-top">
+
+                            <a asp-action="Index"
+                               class="btn btn-light px-4">
+
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Back to Payments
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-primary px-4">
+
+                                <i class="bi bi-check-lg me-2"></i>
+                                Save Payment
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

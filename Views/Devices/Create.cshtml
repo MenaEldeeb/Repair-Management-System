@@ -1,0 +1,339 @@
+﻿
+@model FinalProject.Models.Device
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Add Device";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-xl-8 col-lg-9">
+
+            <!-- Header -->
+
+            <div class="d-flex align-items-center mb-4">
+
+                <div class="page-icon me-3">
+                    <i class="bi bi-laptop"></i>
+                </div>
+
+                <div>
+
+                    <h2 class="fw-bold mb-1">
+                        Add New Device
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Register a customer's device for repair.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Form -->
+
+            <div class="card form-card border-0">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <form asp-action="Create"
+                          method="post">
+
+                        <!-- Validation -->
+
+                        <div asp-validation-summary="All"
+                             class="alert alert-danger">
+                        </div>
+
+
+                        <!-- SECTION 01 -->
+
+                        <div class="section-title mb-4">
+
+                            <div class="section-number">
+                                01
+                            </div>
+
+                            <div>
+
+                                <h5 class="mb-0">
+                                    Device Information
+                                </h5>
+
+                                <small class="text-muted">
+                                    Enter the device details
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <!-- Device Name -->
+
+                            <div class="col-md-6 mb-4">
+
+                                <label asp-for="DeviceName"
+                                       class="form-label fw-semibold">
+
+                                    Device Name
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+
+                                        <i class="bi bi-laptop"></i>
+
+                                    </span>
+
+                                    <input asp-for="DeviceName"
+                                           class="form-control"
+                                           placeholder="e.g. Dell G15" />
+
+                                </div>
+
+                                <span asp-validation-for="DeviceName"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+
+                            <!-- Device Type -->
+
+                            <div class="col-md-6 mb-4">
+
+                                <label asp-for="DeviceType"
+                                       class="form-label fw-semibold">
+
+                                    Device Type
+
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+
+                                        <i class="bi bi-phone"></i>
+
+                                    </span>
+
+                                    <input asp-for="DeviceType"
+                                           class="form-control"
+                                           placeholder="e.g. Laptop" />
+
+                                </div>
+
+                                <span asp-validation-for="DeviceType"
+                                      class="text-danger small">
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Serial Number -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="SerialNumber"
+                                   class="form-label fw-semibold">
+
+                                Serial Number
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    <i class="bi bi-upc-scan"></i>
+
+                                </span>
+
+                                <input asp-for="SerialNumber"
+                                       class="form-control"
+                                       placeholder="Enter serial number" />
+
+                            </div>
+
+                            <span asp-validation-for="SerialNumber"
+                                  class="text-danger small">
+                            </span>
+
+                        </div>
+
+
+                        <!-- SECTION 02 -->
+
+                        <div class="section-title mb-4 mt-2">
+
+                            <div class="section-number">
+                                02
+                            </div>
+
+                            <div>
+
+                                <h5 class="mb-0">
+                                    Customer
+                                </h5>
+
+                                <small class="text-muted">
+                                    Select the device owner
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Customer -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="CustomerId"
+                                   class="form-label fw-semibold">
+
+                                Customer
+
+                            </label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+
+                                    <i class="bi bi-person"></i>
+
+                                </span>
+
+                                <select asp-for="CustomerId"
+                                        class="form-select"
+                                        asp-items="@(new SelectList(ViewBag.Customers, "CustomerId", "Fname"))">
+
+                                    <option value="0">
+                                        -- Select Customer --
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <span asp-validation-for="CustomerId"
+                                  class="text-danger small">
+                            </span>
+
+                        </div>
+
+
+                        <!-- SECTION 03 -->
+
+                        <div class="section-title mb-4 mt-2">
+
+                            <div class="section-number">
+                                03
+                            </div>
+
+                            <div>
+
+                                <h5 class="mb-0">
+                                    Problem Description
+                                </h5>
+
+                                <small class="text-muted">
+                                    Describe the customer's issue
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Problem -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="Problem"
+                                   class="form-label fw-semibold">
+
+                                Problem
+
+                            </label>
+
+                            <textarea asp-for="Problem"
+                                      class="form-control"
+                                      rows="5"
+                                      maxlength="500"
+                                      placeholder="Describe the device problem..."></textarea>
+
+                            <span asp-validation-for="Problem"
+                                  class="text-danger small">
+                            </span>
+
+                            <small class="text-muted">
+                                Maximum 500 characters.
+                            </small>
+
+                        </div>
+
+
+                        <!-- Buttons -->
+
+                        <div class="d-flex flex-column
+                                    flex-sm-row
+                                    justify-content-between
+                                    gap-3
+                                    mt-4
+                                    pt-4
+                                    border-top">
+
+                            <a asp-action="Index"
+                               class="btn btn-light px-4">
+
+                                <i class="bi bi-arrow-left me-2"></i>
+
+                                Back to Devices
+
+                            </a>
+
+
+                            <button type="submit"
+                                    class="btn btn-primary px-4">
+
+                                <i class="bi bi-check-lg me-2"></i>
+
+                                Save Device
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

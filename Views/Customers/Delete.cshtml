@@ -1,0 +1,119 @@
+﻿@model FinalProject.Models.Customer
+
+@{
+    ViewData["Title"] = "Delete Customer";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card form-card border-0">
+
+                <div class="card-body p-4 p-md-5 text-center">
+
+                    <!-- Warning Icon -->
+
+                    <div class="delete-icon mb-4">
+
+                        <i class="bi bi-trash3-fill"></i>
+
+                    </div>
+
+
+                    <h2 class="fw-bold mb-2">
+                        Delete Customer?
+                    </h2>
+
+
+                    <p class="text-muted mb-4">
+
+                        This action cannot be undone.
+                        Are you sure you want to delete this customer?
+
+                    </p>
+
+
+                    <!-- Customer Information -->
+
+                    <div class="delete-customer-box mb-4">
+
+                        <div class="customer-avatar mx-auto mb-3">
+
+                            @Model.Fname.Substring(0, 1).ToUpper()
+
+                        </div>
+
+
+                        <h5 class="fw-bold mb-1">
+
+                            @Model.Fname @Model.Lname
+
+                        </h5>
+
+
+                        <p class="text-muted mb-1">
+
+                            <i class="bi bi-telephone me-1"></i>
+
+                            @Model.Phone
+
+                        </p>
+
+
+                        <small class="text-muted">
+
+                            Customer #@Model.CustomerId
+
+                        </small>
+
+                    </div>
+
+
+                    <!-- Delete Form -->
+
+                    <form asp-action="DeleteConfirmed"
+                          method="post">
+
+                        <input type="hidden"
+                               name="id"
+                               value="@Model.CustomerId" />
+
+
+                        <div class="d-flex flex-column flex-sm-row
+                                    justify-content-center gap-2">
+
+                            <a asp-action="Index"
+                               class="btn btn-light px-4">
+
+                                <i class="bi bi-arrow-left me-2"></i>
+
+                                Cancel
+
+                            </a>
+
+
+                            <button type="submit"
+                                    class="btn btn-danger px-4">
+
+                                <i class="bi bi-trash3 me-2"></i>
+
+                                Yes, Delete Customer
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

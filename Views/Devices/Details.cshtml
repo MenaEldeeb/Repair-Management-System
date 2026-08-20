@@ -1,0 +1,274 @@
+﻿
+@model FinalProject.Models.Device
+
+@{
+    ViewData["Title"] = "Device Details";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-xl-8 col-lg-9">
+
+            <!-- Header -->
+
+            <div class="d-flex align-items-center mb-4">
+
+                <div class="page-icon me-3">
+                    <i class="bi bi-laptop"></i>
+                </div>
+
+                <div>
+
+                    <h2 class="fw-bold mb-1">
+                        Device Details
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        View complete device information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Card -->
+
+            <div class="card form-card border-0">
+
+                <div class="card-body p-4 p-md-5">
+
+
+                    <!-- Device Header -->
+
+                    <div class="d-flex align-items-center mb-5">
+
+                        <div class="customer-avatar customer-avatar-lg">
+
+                            <i class="bi bi-laptop"></i>
+
+                        </div>
+
+                        <div class="ms-3">
+
+                            <h3 class="fw-bold mb-1">
+
+                                @Model.DeviceName
+
+                            </h3>
+
+                            <span class="text-muted">
+
+                                Device #@Model.DeviceId
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+
+                        <!-- Device Name -->
+
+                        <div class="col-md-6 mb-4">
+
+                            <div class="info-box">
+
+                                <div class="info-icon">
+
+                                    <i class="bi bi-laptop"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <small class="text-muted">
+                                        Device Name
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        @Model.DeviceName
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Type -->
+
+                        <div class="col-md-6 mb-4">
+
+                            <div class="info-box">
+
+                                <div class="info-icon">
+
+                                    <i class="bi bi-phone"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <small class="text-muted">
+                                        Device Type
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        @Model.DeviceType
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Serial -->
+
+                        <div class="col-md-6 mb-4">
+
+                            <div class="info-box">
+
+                                <div class="info-icon">
+
+                                    <i class="bi bi-upc-scan"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <small class="text-muted">
+                                        Serial Number
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        @Model.SerialNumber
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Customer -->
+
+                        <div class="col-md-6 mb-4">
+
+                            <div class="info-box">
+
+                                <div class="info-icon">
+
+                                    <i class="bi bi-person"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <small class="text-muted">
+                                        Customer
+                                    </small>
+
+                                    <div class="fw-semibold">
+
+                                        @if (Model.Customer != null)
+                                        {
+                                            @Model.Customer.Fname
+                                            @Model.Customer.Lname
+                                        }
+                                        else
+                                        {
+                                                <span class="text-muted">
+                                                    No Customer
+                                                </span>
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Problem -->
+
+                        <div class="col-12">
+
+                            <div class="info-box">
+
+                                <div class="info-icon">
+
+                                    <i class="bi bi-exclamation-circle"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <small class="text-muted">
+                                        Problem
+                                    </small>
+
+                                    <div class="fw-semibold">
+                                        @Model.Problem
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Footer -->
+
+                <div class="card-footer bg-white border-0 p-4">
+
+                    <div class="d-flex flex-column flex-sm-row
+                                justify-content-between gap-2">
+
+                        <a asp-action="Index"
+                           class="btn btn-light px-4">
+
+                            <i class="bi bi-arrow-left me-2"></i>
+
+                            Back to Devices
+
+                        </a>
+
+
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.DeviceId"
+                           class="btn btn-warning px-4">
+
+                            <i class="bi bi-pencil-square me-2"></i>
+
+                            Edit Device
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

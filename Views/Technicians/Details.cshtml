@@ -1,0 +1,168 @@
+﻿@model FinalProject.Models.Technician
+
+@{
+    ViewData["Title"] = "Technician Details";
+}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+
+    <div class="page-icon mx-auto mb-3">
+        <i class="bi bi-person-gear"></i>
+    </div>
+
+    <div>
+        <h2 class="fw-bold mb-1">
+            Technician Details
+        </h2>
+
+        <p class="text-muted mb-0">
+            View technician information.
+        </p>
+    </div>
+
+</div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card form-card border-0">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <!-- Technician Header -->
+
+                    <div class="text-center mb-5">
+
+                        <div class="customer-avatar mx-auto mb-3"
+                             style="width:80px;height:80px;font-size:32px;">
+
+                            @(string.IsNullOrEmpty(Model.Name)
+                                    ? "T"
+                                    : Model.Name.Substring(0, 1).ToUpper())
+
+                        </div>
+
+                        <h3 class="fw-bold mb-1">
+                            @Model.Name
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Technician #@Model.TechnicianId
+                        </p>
+
+                    </div>
+
+
+                    <!-- Information -->
+
+                    <div class="row g-4">
+
+                        <!-- Name -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-1">
+                                    <i class="bi bi-person me-1"></i>
+                                    Name
+                                </small>
+
+                                <span class="fw-semibold">
+                                    @Model.Name
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Phone -->
+
+                        <div class="col-md-6">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-1">
+                                    <i class="bi bi-telephone me-1"></i>
+                                    Phone
+                                </small>
+
+                                <span class="fw-semibold">
+                                    @Model.Phone
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Specialization -->
+
+                        <div class="col-12">
+
+                            <div class="p-3 border rounded">
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-tools me-1"></i>
+                                    Specialization
+                                </small>
+
+                                @if (!string.IsNullOrEmpty(Model.Specialization))
+                                {
+                                        <span class="badge bg-primary">
+                                        @Model.Specialization
+                                        </span>
+                                }
+                                else
+                                {
+                                        <span class="text-muted">
+                                            Not specified
+                                        </span>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Buttons -->
+
+                    <div class="d-flex flex-column flex-sm-row
+                                justify-content-between
+                                gap-3 mt-5 pt-4 border-top">
+
+                        <a asp-action="Index"
+                           class="btn btn-light px-4">
+
+                            <i class="bi bi-arrow-left me-2"></i>
+                            Back to Technicians
+
+                        </a>
+
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.TechnicianId"
+                           class="btn btn-warning px-4">
+
+                            <i class="bi bi-pencil-square me-2"></i>
+                            Edit Technician
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
