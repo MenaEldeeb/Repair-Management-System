@@ -5,7 +5,12 @@ namespace FinalProject.BusinessLayer
 {
     public class PaymentBL
     {
-        private MyContext db = new MyContext();
+        private readonly MyContext db;
+
+        public PaymentBL(MyContext context)
+        {
+            db = context;
+        }
 
         // =========================
         // GET ALL PAYMENTS
@@ -20,7 +25,6 @@ namespace FinalProject.BusinessLayer
                 .ToList();
         }
 
-
         // =========================
         // GET PAYMENT BY ID
         // =========================
@@ -34,7 +38,6 @@ namespace FinalProject.BusinessLayer
                 .FirstOrDefault(p => p.PaymentId == id);
         }
 
-
         // =========================
         // GET REPAIR ORDER
         // =========================
@@ -47,7 +50,6 @@ namespace FinalProject.BusinessLayer
                 .FirstOrDefault(r => r.RepairOrderId == id);
         }
 
-
         // =========================
         // GET PAYMENT BY REPAIR ORDER
         // =========================
@@ -58,14 +60,12 @@ namespace FinalProject.BusinessLayer
                 .FirstOrDefault(p => p.RepairOrderId == repairOrderId);
         }
 
-
         // =========================
         // ADD PAYMENT
         // =========================
 
         public void AddingPayment(Payment payment)
         {
-            // التأكد أن RepairOrder موجود بالفعل
             var repairOrder = db.RepairOrders
                 .FirstOrDefault(r =>
                     r.RepairOrderId == payment.RepairOrderId);
@@ -73,14 +73,12 @@ namespace FinalProject.BusinessLayer
             if (repairOrder == null)
                 return;
 
-            // منع EF من محاولة إضافة RepairOrder جديد
             payment.RepairOrder = null;
 
             db.Payments.Add(payment);
 
             db.SaveChanges();
         }
-
 
         // =========================
         // EDIT PAYMENT
@@ -98,14 +96,8 @@ namespace FinalProject.BusinessLayer
             existingPayment.PaymentMethod =
                 payment.PaymentMethod;
 
-         
-            // Amount
-            // RepairOrderId
-            // PaymentDate
-
             db.SaveChanges();
         }
-
 
         // =========================
         // DELETE PAYMENT

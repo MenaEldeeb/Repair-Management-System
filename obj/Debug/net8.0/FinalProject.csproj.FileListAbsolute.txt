@@ -1,5 +1,3 @@
-C:\Users\abdok\source\repos\FinalProject\bin\Debug\net8.0\appsettings.Development.json
-C:\Users\abdok\source\repos\FinalProject\bin\Debug\net8.0\appsettings.json
 C:\Users\abdok\source\repos\FinalProject\bin\Debug\net8.0\FinalProject.staticwebassets.runtime.json
 C:\Users\abdok\source\repos\FinalProject\bin\Debug\net8.0\FinalProject.deps.json
 C:\Users\abdok\source\repos\FinalProject\bin\Debug\net8.0\FinalProject.runtimeconfig.json
@@ -134,3 +132,7 @@ C:\Users\abdok\source\repos\FinalProject\obj\Debug\net8.0\FinalProject.pdb
 C:\Users\abdok\source\repos\FinalProject\obj\Debug\net8.0\FinalProject.genruntimeconfig.cache
 C:\Users\abdok\source\repos\FinalProject\obj\Debug\net8.0\ref\FinalProject.dll
 C:\Users\abdok\source\repos\FinalProject\obj\Debug\net8.0\FinalProject.sourcelink.json
+C:\Users\abdok\source\repos\FinalProject\bin\Debug\net8.0\appsettings.Development.json.Development.json
+C:\Users\abdok\source\repos\FinalProject\bin\Debug\net8.0\appsettings.Development.json.json
+C:\Users\abdok\source\repos\FinalProject\bin\Debug\net8.0\appsettings.Production.json.Development.json
+C:\Users\abdok\source\repos\FinalProject\bin\Debug\net8.0\appsettings.Production.json.json

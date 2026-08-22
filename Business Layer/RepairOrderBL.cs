@@ -5,7 +5,12 @@ namespace FinalProject.BusinessLayer
 {
     public class RepairOrderBL
     {
-        MyContext DBCON = new MyContext();
+        private readonly MyContext DBCON;
+
+        public RepairOrderBL(MyContext context)
+        {
+            DBCON = context;
+        }
 
         // =========================
         // GET ALL REPAIR ORDERS
@@ -19,7 +24,6 @@ namespace FinalProject.BusinessLayer
                         .ToList();
         }
 
-
         // =========================
         // GET REPAIR ORDER BY ID
         // =========================
@@ -31,7 +35,6 @@ namespace FinalProject.BusinessLayer
                         .FirstOrDefault(r => r.RepairOrderId == id);
         }
 
-
         // =========================
         // GET ALL DEVICES
         // =========================
@@ -41,7 +44,6 @@ namespace FinalProject.BusinessLayer
                         .OrderBy(d => d.DeviceName)
                         .ToList();
         }
-
 
         // =========================
         // GET ALL TECHNICIANS
@@ -53,7 +55,6 @@ namespace FinalProject.BusinessLayer
                         .ToList();
         }
 
-
         // =========================
         // ADD REPAIR ORDER
         // =========================
@@ -63,7 +64,6 @@ namespace FinalProject.BusinessLayer
             DBCON.SaveChanges();
         }
 
-
         // =========================
         // EDIT REPAIR ORDER
         // =========================
@@ -72,7 +72,6 @@ namespace FinalProject.BusinessLayer
             DBCON.RepairOrders.Update(repairOrder);
             DBCON.SaveChanges();
         }
-
 
         // =========================
         // DELETE REPAIR ORDER

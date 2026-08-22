@@ -4,7 +4,12 @@ namespace FinalProject.BusinessLayer
 {
     public class CustomerBL
     {
-        MyContext DBCON = new MyContext();
+        private readonly MyContext DBCON;
+
+        public CustomerBL(MyContext context)
+        {
+            DBCON = context;
+        }
 
         public List<Customer> GetAllCustomers()
         {
@@ -14,8 +19,7 @@ namespace FinalProject.BusinessLayer
         public Customer GetCustomerById(int id)
         {
             return DBCON.Customers
-                .Where(c => c.CustomerId == id)
-                .FirstOrDefault();
+                .FirstOrDefault(c => c.CustomerId == id);
         }
 
         public void AddCustomer(Customer customer)

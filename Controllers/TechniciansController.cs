@@ -4,10 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using FinalProject.Filters;
 namespace FinalProject.Controllers { 
 [AdminOnly]
-public class TechniciansController : Controller
+    public class TechniciansController : Controller
     {
-        TechnicianBL technicianBL = new TechnicianBL();
+        private readonly TechnicianBL technicianBL;
 
+        public TechniciansController(TechnicianBL technicianBL)
+        {
+            this.technicianBL = technicianBL;
+        }
         // =========================
         // INDEX
         // =========================

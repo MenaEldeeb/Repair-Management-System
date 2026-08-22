@@ -9,11 +9,10 @@ namespace FinalProject.Controllers
     {
         private readonly PaymentBL paymentBL;
 
-        public PaymentsController()
+        public PaymentsController(PaymentBL paymentBL)
         {
-            paymentBL = new PaymentBL();
+            this.paymentBL = paymentBL;
         }
-
 
         // =====================================================
         // ADMIN - INDEX

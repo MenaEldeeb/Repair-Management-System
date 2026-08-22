@@ -2,12 +2,18 @@
 using FinalProject.BusinessLayer;
 using FinalProject.Models;
 using FinalProject.Filters;
+
 namespace FinalProject.Controllers
 {
     [AdminOnly]
     public class CustomersController : Controller
     {
-        CustomerBL customerBL = new CustomerBL();
+        private readonly CustomerBL customerBL;
+
+        public CustomersController(CustomerBL customerBL)
+        {
+            this.customerBL = customerBL;
+        }
 
         public IActionResult Index()
         {

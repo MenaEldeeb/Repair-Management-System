@@ -7,8 +7,12 @@ namespace FinalProject.BusinessLayer
 {
     public class DeviceBL
     {
-        MyContext DBCON = new MyContext();
+        private readonly MyContext DBCON;
 
+        public DeviceBL(MyContext context)
+        {
+            DBCON = context;
+        }
 
         public List<Device> GetAllDevices()
         {
@@ -20,7 +24,6 @@ namespace FinalProject.BusinessLayer
             return res;
         }
 
-
         public Device GetByID(int id)
         {
             var res = DBCON.Devices
@@ -30,20 +33,17 @@ namespace FinalProject.BusinessLayer
             return res;
         }
 
-
         public void AddingDevice(Device d)
         {
             DBCON.Devices.Add(d);
             DBCON.SaveChanges();
         }
 
-
         public void EditDevice(Device d)
         {
             DBCON.Devices.Update(d);
             DBCON.SaveChanges();
         }
-
 
         public void Delete(int id)
         {
@@ -55,7 +55,6 @@ namespace FinalProject.BusinessLayer
                 DBCON.SaveChanges();
             }
         }
-
 
         public List<Customer> GetAllCustomers()
         {

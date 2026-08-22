@@ -4,7 +4,12 @@ namespace FinalProject.BusinessLayer
 {
     public class TechnicianBL
     {
-        MyContext DBCON = new MyContext();
+        private readonly MyContext DBCON;
+
+        public TechnicianBL(MyContext context)
+        {
+            DBCON = context;
+        }
 
         // =========================
         // GET ALL TECHNICIANS

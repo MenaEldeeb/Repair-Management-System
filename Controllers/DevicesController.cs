@@ -2,13 +2,18 @@
 using FinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using FinalProject.Filters;
+
 namespace FinalProject.Controllers
 {
     [AdminOnly]
     public class DevicesController : Controller
     {
-        DeviceBL deviceBL = new DeviceBL();
+        private readonly DeviceBL deviceBL;
 
+        public DevicesController(DeviceBL deviceBL)
+        {
+            this.deviceBL = deviceBL;
+        }
 
         // =========================
         // INDEX
@@ -20,7 +25,6 @@ namespace FinalProject.Controllers
 
             return View(devices);
         }
-
 
         // =========================
         // DETAILS - GET
@@ -44,7 +48,6 @@ namespace FinalProject.Controllers
             return View(device);
         }
 
-
         // =========================
         // CREATE - GET
         // =========================
@@ -56,7 +59,6 @@ namespace FinalProject.Controllers
 
             return View();
         }
-
 
         // =========================
         // CREATE - POST
@@ -92,7 +94,6 @@ namespace FinalProject.Controllers
             }
         }
 
-
         // =========================
         // EDIT - GET
         // =========================
@@ -116,7 +117,6 @@ namespace FinalProject.Controllers
 
             return View(device);
         }
-
 
         // =========================
         // EDIT - POST
@@ -157,7 +157,6 @@ namespace FinalProject.Controllers
             }
         }
 
-
         // =========================
         // DELETE - GET
         // =========================
@@ -179,7 +178,6 @@ namespace FinalProject.Controllers
 
             return View(device);
         }
-
 
         // =========================
         // DELETE - POST
