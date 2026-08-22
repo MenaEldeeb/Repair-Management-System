@@ -1,0 +1,384 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - RepairHub
+    </title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Site CSS -->
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+</head>
+
+<body class="bg-light">
+
+    <!-- =========================
+         CUSTOMER NAVBAR
+    ========================== -->
+
+    <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top">
+
+        <div class="container">
+
+            <!-- BRAND -->
+
+            <a class="navbar-brand d-flex align-items-center fw-bold fs-4"
+               asp-controller="Home"
+               asp-action="Index">
+
+                <span class="bg-primary text-white rounded-3
+                             d-inline-flex align-items-center
+                             justify-content-center me-2"
+                      style="width:42px;height:42px;">
+
+                    <i class="bi bi-tools"></i>
+
+                </span>
+
+                Repair<span class="text-primary">Hub</span>
+
+            </a>
+
+
+            <!-- MOBILE BUTTON -->
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#customerNavbar"
+                    aria-controls="customerNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <!-- NAVIGATION -->
+
+            <div class="collapse navbar-collapse"
+                 id="customerNavbar">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+
+                    <!-- HOME -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link px-3 fw-semibold customer-nav-link"
+                           asp-controller="Home"
+                           asp-action="Index">
+
+                            <i class="bi bi-house-door me-1"></i>
+                            Home
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- SERVICES -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link px-3 fw-semibold customer-nav-link"
+                           href="#services">
+
+                            <i class="bi bi-grid me-1"></i>
+                            Services
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- HOW IT WORKS -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link px-3 fw-semibold customer-nav-link"
+                           href="#how-it-works">
+
+                            <i class="bi bi-list-check me-1"></i>
+                            How It Works
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- TRACK -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link px-3 fw-semibold customer-nav-link"
+                           asp-controller="CustomerRepair"
+                           asp-action="Track">
+
+                            <i class="bi bi-search me-1"></i>
+                            Track Repair
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- REQUEST -->
+
+                    <li class="nav-item ms-lg-2">
+
+                        <a class="btn btn-primary px-4 rounded-pill"
+                           asp-controller="CustomerRepair"
+                           asp-action="RequestRepair">
+
+                            <i class="bi bi-tools me-2"></i>
+                            Request Repair
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         CONTENT
+    ========================== -->
+
+    <main>
+
+        @RenderBody()
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="bg-dark text-white mt-5">
+
+        <div class="container py-5">
+
+            <div class="row g-4">
+
+
+                <!-- BRAND -->
+
+                <div class="col-lg-5">
+
+                    <h5 class="fw-bold">
+
+                        <i class="bi bi-tools text-primary me-2"></i>
+
+                        Repair<span class="text-primary">Hub</span>
+
+                    </h5>
+
+                    <p class="text-white-50 mt-3 mb-0">
+
+                        Professional computer and laptop
+                        repair services you can trust.
+
+                    </p>
+
+                </div>
+
+
+                <!-- QUICK LINKS -->
+
+                <div class="col-lg-3">
+
+                    <h6 class="fw-bold">
+                        Quick Links
+                    </h6>
+
+                    <ul class="list-unstyled mt-3">
+
+                        <li class="mb-2">
+
+                            <a asp-controller="Home"
+                               asp-action="Index"
+                               class="text-white-50 text-decoration-none">
+
+                                Home
+
+                            </a>
+
+                        </li>
+
+                        <li class="mb-2">
+
+                            <a asp-controller="CustomerRepair"
+                               asp-action="RequestRepair"
+                               class="text-white-50 text-decoration-none">
+
+                                Request Repair
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a asp-controller="CustomerRepair"
+                               asp-action="Track"
+                               class="text-white-50 text-decoration-none">
+
+                                Track Repair
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- SERVICE -->
+
+                <div class="col-lg-4">
+
+                    <h6 class="fw-bold">
+                        Why RepairHub?
+                    </h6>
+
+                    <div class="text-white-50 mt-3">
+
+                        <div class="mb-2">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Professional Technicians
+                        </div>
+
+                        <div class="mb-2">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Fast & Reliable Service
+                        </div>
+
+                        <div>
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Easy Repair Tracking
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <hr class="border-secondary my-4" />
+
+
+            <div class="d-flex flex-column flex-md-row
+                        justify-content-between
+                        text-white-50 small">
+
+                <span>
+                    © @DateTime.Now.Year RepairHub.
+                    All rights reserved.
+                </span>
+
+                <span>
+                    Professional Device Repair
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- SCRIPTS -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
+    <!-- NAVBAR HOVER -->
+
+    <style>
+
+        .customer-nav-link {
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .customer-nav-link:hover {
+            color: var(--bs-primary) !important;
+            transform: translateY(-1px);
+        }
+
+        .customer-nav-link::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 2px;
+            width: 0;
+            height: 2px;
+            background-color: var(--bs-primary);
+            transition: all 0.25s ease;
+            transform: translateX(-50%);
+        }
+
+        .customer-nav-link:hover::after {
+            width: 65%;
+        }
+
+        .navbar-brand {
+            transition: transform 0.2s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: translateY(-1px);
+        }
+
+        .navbar .btn {
+            transition: all 0.2s ease;
+        }
+
+        .navbar .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    </style>
+
+
+    @await RenderSectionAsync(
+                "Scripts",
+                required: false
+            )
+
+</body>
+
+</html>

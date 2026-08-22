@@ -1,0 +1,215 @@
+﻿@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+
+    ViewData["Title"] = "Track Repair";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+
+            <!-- ========================= -->
+            <!-- HEADER -->
+            <!-- ========================= -->
+
+            <div class="text-center mb-4">
+
+                <span class="badge bg-primary mb-3">
+
+                    <i class="bi bi-search me-1"></i>
+
+                    REPAIR TRACKING
+
+                </span>
+
+
+                <h1 class="fw-bold">
+
+                    Track Your Repair
+
+                </h1>
+
+
+                <p class="text-muted">
+
+                    Enter your repair order number and phone number.
+
+                </p>
+
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- SUCCESS MESSAGE -->
+            <!-- ========================= -->
+
+            @if (TempData["Success"] != null)
+            {
+                    <div class="alert alert-success rounded-3">
+
+                        <i class="bi bi-check-circle me-2"></i>
+
+                    @TempData["Success"]
+
+                    </div>
+            }
+
+
+            <!-- ========================= -->
+            <!-- ERROR MESSAGE -->
+            <!-- ========================= -->
+
+            @if (ViewBag.Error != null)
+            {
+                    <div class="alert alert-danger rounded-3">
+
+                        <i class="bi bi-exclamation-circle me-2"></i>
+
+                    @ViewBag.Error
+
+                    </div>
+            }
+
+
+            @if (TempData["Error"] != null)
+            {
+                    <div class="alert alert-danger rounded-3">
+
+                        <i class="bi bi-exclamation-circle me-2"></i>
+
+                    @TempData["Error"]
+
+                    </div>
+            }
+
+
+            <!-- ========================= -->
+            <!-- TRACK CARD -->
+            <!-- ========================= -->
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body p-4 p-md-5">
+
+
+                    <!-- FORM -->
+
+                    <form asp-controller="CustomerRepair"
+                          asp-action="Track"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+
+                        <!-- ========================= -->
+                        <!-- REPAIR ORDER ID -->
+                        <!-- ========================= -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+
+                                Repair Order Number
+
+                            </label>
+
+
+                            <div class="input-group input-group-lg">
+
+                                <span class="input-group-text">
+
+                                    <i class="bi bi-hash"></i>
+
+                                </span>
+
+
+                                <input type="number"
+                                       name="repairOrderId"
+                                       class="form-control"
+                                       placeholder="Example: 25"
+                                       min="1"
+                                       required />
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ========================= -->
+                        <!-- PHONE -->
+                        <!-- ========================= -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+
+                                Phone Number
+
+                            </label>
+
+
+                            <div class="input-group input-group-lg">
+
+                                <span class="input-group-text">
+
+                                    <i class="bi bi-telephone"></i>
+
+                                </span>
+
+
+                                <input type="text"
+                                       name="phone"
+                                       class="form-control"
+                                       placeholder="Enter your phone number"
+                                       required />
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ========================= -->
+                        <!-- BUTTON -->
+                        <!-- ========================= -->
+
+                        <button type="submit"
+                                class="btn btn-primary btn-lg w-100">
+
+                            <i class="bi bi-search me-2"></i>
+
+                            Track My Repair
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- ========================= -->
+                    <!-- INFO -->
+                    <!-- ========================= -->
+
+                    <div class="text-center mt-4">
+
+                        <small class="text-muted">
+
+                            <i class="bi bi-shield-check me-1"></i>
+
+                            Your phone number is used to securely
+                            access your repair information.
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

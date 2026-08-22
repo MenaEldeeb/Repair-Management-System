@@ -1,0 +1,265 @@
+﻿@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Request a Repair";
+}
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-9">
+
+            <div class="text-center mb-5">
+
+                <span class="badge bg-primary mb-3">
+                    <i class="bi bi-tools"></i>
+                    REPAIR SERVICE
+                </span>
+
+                <h1 class="fw-bold">
+                    Request a Repair
+                </h1>
+
+                <p class="text-muted">
+                    Tell us about your device and we'll take care of it.
+                </p>
+
+            </div>
+
+
+            @if (ViewBag.Error != null)
+            {
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-circle"></i>
+                    @ViewBag.Error
+                    </div>
+            }
+
+
+            <form asp-controller="CustomerRepair"
+                  asp-action="RequestRepair"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+
+                <!-- CUSTOMER -->
+
+                <div class="card border-0 shadow-sm mb-4">
+
+                    <div class="card-header bg-white p-4">
+
+                        <h5 class="fw-bold mb-0">
+                            <i class="bi bi-person text-primary"></i>
+                            Your Information
+                        </h5>
+
+                    </div>
+
+                    <div class="card-body p-4">
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    First Name *
+                                </label>
+
+                                <input name="fname"
+                                       class="form-control"
+                                       maxlength="30"
+                                       required />
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Last Name *
+                                </label>
+
+                                <input name="lname"
+                                       class="form-control"
+                                       maxlength="30"
+                                       required />
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Phone *
+                                </label>
+
+                                <input name="phone"
+                                       class="form-control"
+                                       maxlength="15"
+                                       required />
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Email
+                                </label>
+
+                                <input name="email"
+                                       type="email"
+                                       class="form-control"
+                                       maxlength="100" />
+
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <label class="form-label">
+                                    Address
+                                </label>
+
+                                <input name="address"
+                                       class="form-control"
+                                       maxlength="200" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DEVICE -->
+
+                <div class="card border-0 shadow-sm mb-4">
+
+                    <div class="card-header bg-white p-4">
+
+                        <h5 class="fw-bold mb-0">
+                            <i class="bi bi-laptop text-primary"></i>
+                            Device Information
+                        </h5>
+
+                    </div>
+
+
+                    <div class="card-body p-4">
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Device Name *
+                                </label>
+
+                                <input name="deviceName"
+                                       class="form-control"
+                                       placeholder="Example: Dell Laptop"
+                                       maxlength="50"
+                                       required />
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Device Type *
+                                </label>
+
+                                <select name="deviceType"
+                                        class="form-select"
+                                        required>
+
+                                    <option value="">
+                                        Select device type
+                                    </option>
+
+                                    <option value="Laptop">
+                                        Laptop
+                                    </option>
+
+                                    <option value="Phone">
+                                        Phone
+                                    </option>
+
+                                    <option value="Desktop">
+                                        Desktop
+                                    </option>
+
+                                    <option value="Tablet">
+                                        Tablet
+                                    </option>
+
+                                    <option value="Other">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <label class="form-label">
+                                    Serial Number
+                                </label>
+
+                                <input name="serialNumber"
+                                       class="form-control"
+                                       maxlength="50" />
+
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <label class="form-label">
+                                    What's wrong with your device? *
+                                </label>
+
+                                <textarea name="problem"
+                                          class="form-control"
+                                          rows="5"
+                                          maxlength="500"
+                                          placeholder="Describe the problem..."
+                                          required></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <div class="text-center">
+
+                    <button type="submit"
+                            class="btn btn-primary btn-lg px-5">
+
+                        <i class="bi bi-send"></i>
+
+                        Submit Repair Request
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

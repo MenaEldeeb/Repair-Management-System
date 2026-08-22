@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinalProject.Models
@@ -7,16 +6,18 @@ namespace FinalProject.Models
     public class Payment
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PaymentId { get; set; }
 
+        [Required]
+        [Range(0.01, 1000000)]
         public decimal Amount { get; set; }
 
-        public DateTime PaymentDate { get; set; }
+        [Required]
+        public DateTime PaymentDate { get; set; } = DateTime.Now;
 
         [Required]
-        [MaxLength(30)]
-        public string PaymentMethod { get; set; } = string.Empty;
+        [MaxLength(20)]
+        public string PaymentMethod { get; set; } = "Cash";
 
         public int RepairOrderId { get; set; }
 
@@ -24,5 +25,3 @@ namespace FinalProject.Models
         public RepairOrder? RepairOrder { get; set; }
     }
 }
-
-

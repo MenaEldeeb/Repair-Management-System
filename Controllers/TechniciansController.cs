@@ -1,10 +1,10 @@
 ﻿using FinalProject.BusinessLayer;
 using FinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
-
-namespace FinalProject.Controllers
-{
-    public class TechniciansController : Controller
+using FinalProject.Filters;
+namespace FinalProject.Controllers { 
+[AdminOnly]
+public class TechniciansController : Controller
     {
         TechnicianBL technicianBL = new TechnicianBL();
 

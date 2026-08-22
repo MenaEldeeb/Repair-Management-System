@@ -14,8 +14,10 @@ namespace FinalProject.BusinessLayer
         public List<Payment> GetAllPayments()
         {
             return db.Payments
-                     .Include(p => p.RepairOrder)
-                     .ToList();
+                .Include(p => p.RepairOrder)
+                    .ThenInclude(r => r.Device)
+                        .ThenInclude(d => d.Customer)
+                .ToList();
         }
 
 
@@ -23,21 +25,37 @@ namespace FinalProject.BusinessLayer
         // GET PAYMENT BY ID
         // =========================
 
-        public Payment GetByID(int id)
+        public Payment? GetByID(int id)
         {
             return db.Payments
-                     .Include(p => p.RepairOrder)
-                     .FirstOrDefault(p => p.PaymentId == id);
+                .Include(p => p.RepairOrder)
+                    .ThenInclude(r => r.Device)
+                        .ThenInclude(d => d.Customer)
+                .FirstOrDefault(p => p.PaymentId == id);
         }
 
 
         // =========================
-        // GET REPAIR ORDERS
+        // GET REPAIR ORDER
         // =========================
 
-        public List<RepairOrder> GetAllRepairOrders()
+        public RepairOrder? GetRepairOrderById(int id)
         {
-            return db.RepairOrders.ToList();
+            return db.RepairOrders
+                .Include(r => r.Device)
+                    .ThenInclude(d => d.Customer)
+                .FirstOrDefault(r => r.RepairOrderId == id);
+        }
+
+
+        // =========================
+        // GET PAYMENT BY REPAIR ORDER
+        // =========================
+
+        public Payment? GetPaymentByRepairOrderId(int repairOrderId)
+        {
+            return db.Payments
+                .FirstOrDefault(p => p.RepairOrderId == repairOrderId);
         }
 
 
@@ -47,6 +65,17 @@ namespace FinalProject.BusinessLayer
 
         public void AddingPayment(Payment payment)
         {
+            // التأكد أن RepairOrder موجود بالفعل
+            var repairOrder = db.RepairOrders
+                .FirstOrDefault(r =>
+                    r.RepairOrderId == payment.RepairOrderId);
+
+            if (repairOrder == null)
+                return;
+
+            // منع EF من محاولة إضافة RepairOrder جديد
+            payment.RepairOrder = null;
+
             db.Payments.Add(payment);
 
             db.SaveChanges();
@@ -59,7 +88,20 @@ namespace FinalProject.BusinessLayer
 
         public void EditPayment(Payment payment)
         {
-            db.Payments.Update(payment);
+            var existingPayment = db.Payments
+                .FirstOrDefault(p =>
+                    p.PaymentId == payment.PaymentId);
+
+            if (existingPayment == null)
+                return;
+
+            existingPayment.PaymentMethod =
+                payment.PaymentMethod;
+
+         
+            // Amount
+            // RepairOrderId
+            // PaymentDate
 
             db.SaveChanges();
         }
@@ -76,7 +118,6 @@ namespace FinalProject.BusinessLayer
             if (payment != null)
             {
                 db.Payments.Remove(payment);
-
                 db.SaveChanges();
             }
         }

@@ -1,38 +1,54 @@
-﻿using FinalProject.BusinessLayer;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using FinalProject.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace FinalProject.Controllers
-{
-    public class RepairOrdersController : Controller
+using FinalProject.Filters;
+namespace FinalProject.Controllers {
+[AdminOnly]
+public class RepairOrdersController : Controller
     {
-        RepairOrderBL repairOrderBL = new RepairOrderBL();
+        private readonly MyContext _context;
 
-
-        // =========================
-        // INDEX
-        // =========================
-
-        public IActionResult Index()
+        public RepairOrdersController(MyContext context)
         {
-            var repairOrders = repairOrderBL.GetAllRepairOrders();
+            _context = context;
+        }
+
+
+        // =====================================================
+        // INDEX
+        // =====================================================
+
+        public async Task<IActionResult> Index()
+        {
+            var repairOrders = await _context.RepairOrders
+                .Include(r => r.Device)
+                    .ThenInclude(d => d.Customer)
+                .Include(r => r.Technician)
+                .Include(r => r.Payments)
+                .OrderByDescending(r => r.RepairOrderId)
+                .ToListAsync();
 
             return View(repairOrders);
         }
 
 
-        // =========================
+        // =====================================================
         // DETAILS
-        // =========================
+        // =====================================================
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var repairOrder = repairOrderBL.GetByID(id.Value);
+            var repairOrder = await _context.RepairOrders
+                .Include(r => r.Device)
+                    .ThenInclude(d => d.Customer)
+                .Include(r => r.Technician)
+                .Include(r => r.Payments)
+                .FirstOrDefaultAsync(r => r.RepairOrderId == id);
 
             if (repairOrder == null)
             {
@@ -43,108 +59,160 @@ namespace FinalProject.Controllers
         }
 
 
-        // =========================
+        // =====================================================
         // CREATE - GET
-        // =========================
+        // =====================================================
 
-        [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Devices = repairOrderBL.GetAllDevices();
-            ViewBag.Technicians = repairOrderBL.GetAllTechnicians();
+            ViewBag.Devices = await _context.Devices
+                .Include(d => d.Customer)
+                .ToListAsync();
+
+            ViewBag.Technicians = await _context.Technicians
+                .ToListAsync();
 
             return View();
         }
 
 
-        // =========================
+        // =====================================================
         // CREATE - POST
-        // =========================
+        // =====================================================
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(RepairOrder repairOrder)
+        public async Task<IActionResult> Create(RepairOrder repairOrder)
         {
             if (ModelState.IsValid)
             {
-                repairOrderBL.AddingRepairOrder(repairOrder);
+                repairOrder.ReceiveDate = DateTime.Now;
+
+                repairOrder.Status = "Pending";
+
+                _context.RepairOrders.Add(repairOrder);
+
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Devices = repairOrderBL.GetAllDevices();
-            ViewBag.Technicians = repairOrderBL.GetAllTechnicians();
+
+            // لو فيه Error نرجع البيانات للـ View
+
+            ViewBag.Devices = await _context.Devices
+                .Include(d => d.Customer)
+                .ToListAsync();
+
+            ViewBag.Technicians = await _context.Technicians
+                .ToListAsync();
 
             return View(repairOrder);
         }
 
 
-        // =========================
+        // =====================================================
         // EDIT - GET
-        // =========================
+        // =====================================================
 
-        [HttpGet]
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var repairOrder = repairOrderBL.GetByID(id.Value);
+            var repairOrder = await _context.RepairOrders
+                .Include(r => r.Device)
+                    .ThenInclude(d => d.Customer)
+                .Include(r => r.Technician)
+                .FirstOrDefaultAsync(r => r.RepairOrderId == id);
 
             if (repairOrder == null)
             {
                 return NotFound();
             }
 
-            ViewBag.Devices = repairOrderBL.GetAllDevices();
-            ViewBag.Technicians = repairOrderBL.GetAllTechnicians();
+
+            ViewBag.Devices = await _context.Devices
+                .Include(d => d.Customer)
+                .ToListAsync();
+
+            ViewBag.Technicians = await _context.Technicians
+                .ToListAsync();
+
 
             return View(repairOrder);
         }
 
 
-        // =========================
+        // =====================================================
         // EDIT - POST
-        // =========================
+        // =====================================================
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, RepairOrder repairOrder)
+        public async Task<IActionResult> Edit(
+            int id,
+            RepairOrder repairOrder)
         {
             if (id != repairOrder.RepairOrderId)
             {
                 return NotFound();
             }
 
+
             if (ModelState.IsValid)
             {
-                repairOrderBL.EditRepairOrder(repairOrder);
+                try
+                {
+                    _context.Update(repairOrder);
+
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!RepairOrderExists(repairOrder.RepairOrderId))
+                    {
+                        return NotFound();
+                    }
+
+                    throw;
+                }
 
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Devices = repairOrderBL.GetAllDevices();
-            ViewBag.Technicians = repairOrderBL.GetAllTechnicians();
+
+            ViewBag.Devices = await _context.Devices
+                .Include(d => d.Customer)
+                .ToListAsync();
+
+            ViewBag.Technicians = await _context.Technicians
+                .ToListAsync();
+
 
             return View(repairOrder);
         }
 
 
-        // =========================
+        // =====================================================
         // DELETE - GET
-        // =========================
+        // =====================================================
 
-        [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var repairOrder = repairOrderBL.GetByID(id.Value);
+            var repairOrder = await _context.RepairOrders
+                .Include(r => r.Device)
+                    .ThenInclude(d => d.Customer)
+                .Include(r => r.Technician)
+                .Include(r => r.Payments)
+                .FirstOrDefaultAsync(r => r.RepairOrderId == id);
 
             if (repairOrder == null)
             {
@@ -155,17 +223,52 @@ namespace FinalProject.Controllers
         }
 
 
-        // =========================
+        // =====================================================
         // DELETE - POST
-        // =========================
+        // =====================================================
 
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            repairOrderBL.Delete(id);
+            var repairOrder = await _context.RepairOrders
+                .FirstOrDefaultAsync(r => r.RepairOrderId == id);
+
+            if (repairOrder == null)
+            {
+                return NotFound();
+            }
+
+
+            // حذف الـ Payments المرتبطة بالأوردر أولاً
+
+            var payments = await _context.Payments
+                .Where(p => p.RepairOrderId == id)
+                .ToListAsync();
+
+            if (payments.Any())
+            {
+                _context.Payments.RemoveRange(payments);
+            }
+
+
+            _context.RepairOrders.Remove(repairOrder);
+
+            await _context.SaveChangesAsync();
+
 
             return RedirectToAction(nameof(Index));
+        }
+
+
+        // =====================================================
+        // CHECK EXISTS
+        // =====================================================
+
+        private bool RepairOrderExists(int id)
+        {
+            return _context.RepairOrders
+                .Any(e => e.RepairOrderId == id);
         }
     }
 }

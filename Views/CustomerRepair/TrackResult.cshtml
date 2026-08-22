@@ -1,0 +1,550 @@
+﻿
+            @model FinalProject.Models.RepairOrder
+
+@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Repair Status";
+
+    var status = Model.Status ?? "Pending";
+    var customerPhone = Model.Device?.Customer?.Phone;
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <!-- ================= HEADER ================= -->
+
+            <div class="text-center mb-4">
+
+                <span class="badge bg-primary">
+                    <i class="bi bi-tools me-1"></i>
+                    REPAIR STATUS
+                </span>
+
+                <h1 class="fw-bold mt-2">
+                    Repair #@Model.RepairOrderId
+                </h1>
+
+                <p class="text-muted">
+                    Track your repair request and payment
+                </p>
+
+            </div>
+
+
+            <!-- ================= SUCCESS ================= -->
+
+            @if (TempData["Success"] != null)
+            {
+                    <div class="alert alert-success rounded-3">
+
+                        <i class="bi bi-check-circle me-2"></i>
+
+                    @TempData["Success"]
+
+                    </div>
+            }
+
+
+            <!-- ================= ERROR ================= -->
+
+            @if (TempData["Error"] != null)
+            {
+                    <div class="alert alert-danger rounded-3">
+
+                        <i class="bi bi-exclamation-circle me-2"></i>
+
+                    @TempData["Error"]
+
+                    </div>
+            }
+
+
+            <!-- ================================================= -->
+            <!-- STATUS -->
+            <!-- ================================================= -->
+
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+                <div class="card-body p-4 text-center">
+
+                    @if (status == "Pending")
+                    {
+                            <i class="bi bi-clock text-warning"
+                               style="font-size:55px;"></i>
+
+                            <h3 class="fw-bold mt-3">
+                                Pending
+                            </h3>
+
+                            <p class="text-muted mb-0">
+                                Your device is waiting to be repaired.
+                            </p>
+                    }
+                    else if (status == "In Progress")
+                    {
+                            <i class="bi bi-wrench-adjustable text-primary"
+                               style="font-size:55px;"></i>
+
+                            <h3 class="fw-bold mt-3">
+                                In Progress
+                            </h3>
+
+                            <p class="text-muted mb-0">
+                                Our technician is currently working on your device.
+                            </p>
+                    }
+                    else if (status == "Ready for Collection")
+                    {
+                            <i class="bi bi-check-circle-fill text-success"
+                               style="font-size:55px;"></i>
+
+                            <h3 class="fw-bold mt-3">
+                                Ready for Collection
+                            </h3>
+
+                            <p class="text-muted mb-0">
+                                Your device is ready. You can collect it from the shop.
+                            </p>
+                    }
+                    else if (status == "Completed")
+                    {
+                            <i class="bi bi-check-circle-fill text-success"
+                               style="font-size:55px;"></i>
+
+                            <h3 class="fw-bold mt-3">
+                                Completed
+                            </h3>
+
+                            <p class="text-muted mb-0">
+                                Your repair has been completed successfully.
+                            </p>
+                    }
+                    else if (status == "Cancelled")
+                    {
+                            <i class="bi bi-x-circle-fill text-danger"
+                               style="font-size:55px;"></i>
+
+                            <h3 class="fw-bold mt-3">
+                                Cancelled
+                            </h3>
+
+                            <p class="text-muted mb-0">
+                                This repair request has been cancelled.
+                            </p>
+                    }
+                    else
+                    {
+                            <i class="bi bi-tools text-secondary"
+                               style="font-size:55px;"></i>
+
+                            <h3 class="fw-bold mt-3">
+                            @status
+                            </h3>
+                    }
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- REPAIR DETAILS -->
+            <!-- ================================================= -->
+
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+                <div class="card-header bg-white p-4">
+
+                    <h5 class="fw-bold mb-0">
+
+                        <i class="bi bi-clipboard-check me-2 text-primary"></i>
+
+                        Repair Details
+
+                    </h5>
+
+                </div>
+
+
+                <div class="card-body p-4">
+
+                    <div class="row g-4">
+
+                        <!-- DEVICE -->
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted d-block">
+                                DEVICE
+                            </small>
+
+                            <strong>
+                                @(Model.Device?.DeviceName ?? "Unknown")
+                            </strong>
+
+                        </div>
+
+
+                        <!-- DEVICE TYPE -->
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted d-block">
+                                DEVICE TYPE
+                            </small>
+
+                            <strong>
+                                @(Model.Device?.DeviceType ?? "-")
+                            </strong>
+
+                        </div>
+
+
+                        <!-- SERIAL -->
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted d-block">
+                                SERIAL NUMBER
+                            </small>
+
+                            <strong>
+                                @(Model.Device?.SerialNumber ?? "-")
+                            </strong>
+
+                        </div>
+
+
+                        <!-- RECEIVED -->
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted d-block">
+                                RECEIVED
+                            </small>
+
+                            <strong>
+                                @Model.ReceiveDate.ToString("dd MMM yyyy")
+                            </strong>
+
+                        </div>
+
+
+                        <!-- TECHNICIAN -->
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted d-block">
+                                TECHNICIAN
+                            </small>
+
+                            <strong>
+                                @(Model.Technician?.Name ?? "Not assigned")
+                            </strong>
+
+                        </div>
+
+
+                        <!-- DELIVERY DATE -->
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted d-block">
+                                DELIVERY DATE
+                            </small>
+
+                            <strong>
+                                @(Model.DeliveryDate.HasValue
+                                        ? Model.DeliveryDate.Value.ToString("dd MMM yyyy")
+                                        : "Not available yet")
+                            </strong>
+
+                        </div>
+
+
+                        <!-- PROBLEM -->
+
+                        <div class="col-12">
+
+                            <small class="text-muted d-block">
+                                PROBLEM
+                            </small>
+
+                            <p class="mb-0">
+                                @Model.Description
+                            </p>
+
+                        </div>
+
+
+                        <!-- COST -->
+
+                        <div class="col-md-6">
+
+                            <small class="text-muted d-block">
+                                REPAIR COST
+                            </small>
+
+                            <strong class="fs-5 text-primary">
+                                @Model.Cost.ToString("0.00") EGP
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+           
+
+
+                    
+
+<!-- PAYMENT -->
+
+<div class="card border-0 shadow-sm rounded-4 mb-4">
+
+    <div class="card-body p-4 text-center">
+
+        <h5 class="fw-bold mb-3">
+            <i class="bi bi-credit-card me-2 text-primary"></i>
+            Payment
+        </h5>
+
+
+                    @if (Model.Cost <= 0)
+                    {
+                <div class="alert alert-info mb-0">
+
+                    <i class="bi bi-info-circle me-2"></i>
+
+                    The repair cost has not been confirmed yet.
+
+                </div>
+                    }
+
+                    @if (Model.Cost > 0 &&
+                        Model.Payments != null &&
+                        Model.Payments.Any())
+                    {
+                <div class="alert alert-success mb-4">
+
+                    <i class="bi bi-check-circle me-2"></i>
+
+                    Payment has already been recorded.
+
+                </div>
+
+
+                <div class="row g-3 text-start mb-4">
+
+                    <!-- AMOUNT -->
+
+                    <div class="col-md-4">
+
+                        <div class="p-3 border rounded">
+
+                            <small class="text-muted d-block mb-1">
+                                Amount
+                            </small>
+
+                            <strong>
+                                        @Model.Payments.First().Amount.ToString("0.00") EGP
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PAYMENT METHOD -->
+
+                    <div class="col-md-4">
+
+                        <div class="p-3 border rounded">
+
+                            <small class="text-muted d-block mb-1">
+                                Payment Method
+                            </small>
+
+                            <strong>
+                                        @Model.Payments.First().PaymentMethod
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PAYMENT DATE -->
+
+                    <div class="col-md-4">
+
+                        <div class="p-3 border rounded">
+
+                            <small class="text-muted d-block mb-1">
+                                Payment Date
+                            </small>
+
+                            <strong>
+                                        @Model.Payments.First().PaymentDate.ToString("dd/MM/yyyy")
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CUSTOMER PAYMENT BUTTONS -->
+
+                <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+                    <a asp-controller="CustomerPayment"
+                       asp-action="Details"
+                       asp-route-id="@Model.Payments.First().PaymentId"
+                       asp-route-repairOrderId="@Model.RepairOrderId"
+                       asp-route-phone="@Model.Device?.Customer?.Phone"
+                       class="btn btn-outline-primary">
+
+                        <i class="bi bi-eye me-1"></i>
+
+                        View Payment
+
+                    </a>
+
+
+                    <a asp-controller="CustomerPayment"
+                       asp-action="Edit"
+                       asp-route-id="@Model.Payments.First().PaymentId"
+                       asp-route-repairOrderId="@Model.RepairOrderId"
+                       asp-route-phone="@Model.Device?.Customer?.Phone"
+                       class="btn btn-primary">
+
+                        <i class="bi bi-pencil-square me-1"></i>
+
+                        Edit Payment
+
+                    </a>
+
+                </div>
+                    }
+
+
+                    @if (Model.Cost > 0 &&
+                        (Model.Payments == null || !Model.Payments.Any()))
+                    {
+                <p class="text-muted mb-2">
+                    Your repair cost is
+                </p>
+
+                <div class="display-6 fw-bold text-primary mb-4">
+                            @Model.Cost.ToString("0.00") EGP
+                </div>
+
+
+                <a asp-controller="CustomerPayment"
+                   asp-action="Create"
+                   asp-route-repairOrderId="@Model.RepairOrderId"
+                   class="btn btn-primary btn-lg px-5">
+
+                    <i class="bi bi-credit-card me-2"></i>
+
+                    Pay Now
+
+                </a>
+                    }
+
+    </div>
+
+</div>
+            <!-- ================================================= -->
+            <!-- CUSTOMER ACTIONS -->
+            <!-- ================================================= -->
+
+            @if (status == "Pending")
+            {
+                    <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+                        <div class="card-body p-4">
+
+                            <h5 class="fw-bold mb-2">
+                                Manage Your Request
+                            </h5>
+
+                            <p class="text-muted">
+                                You can edit or cancel your request
+                                while it is still pending.
+                            </p>
+
+
+                            <div class="d-flex gap-2 flex-wrap">
+
+                                <!-- EDIT REQUEST -->
+
+                                <a asp-controller="CustomerRepair"
+                                   asp-action="Edit"
+                                   asp-route-id="@Model.RepairOrderId"
+                                   asp-route-phone="@customerPhone"
+                                   class="btn btn-primary">
+
+                                    <i class="bi bi-pencil me-1"></i>
+
+                                    Edit Request
+
+                                </a>
+
+
+                                <!-- CANCEL REQUEST -->
+
+                                <a asp-controller="CustomerRepair"
+                                   asp-action="Delete"
+                                   asp-route-id="@Model.RepairOrderId"
+                                   asp-route-phone="@customerPhone"
+                                   class="btn btn-outline-danger">
+
+                                    <i class="bi bi-trash me-1"></i>
+
+                                    Cancel Request
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+            }
+
+
+            <!-- ================================================= -->
+            <!-- BACK -->
+            <!-- ================================================= -->
+
+            <div class="text-center">
+
+                <a asp-controller="CustomerRepair"
+                   asp-action="Track"
+                   class="btn btn-outline-primary">
+
+                    <i class="bi bi-search me-1"></i>
+
+                    Track Another Repair
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

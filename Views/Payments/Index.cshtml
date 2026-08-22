@@ -6,46 +6,32 @@
 
 <div class="container py-5">
 
-    <!-- Page Header -->
-
+    <!-- PAGE HEADER -->
     <div class="d-flex flex-column flex-md-row
                 justify-content-between
                 align-items-md-center
                 mb-4 gap-3">
 
-        <div class="d-flex align-items-center">
+        <div class="text-center text-md-start">
 
-            <div class="page-icon me-3">
+            <div class="page-icon mb-3">
                 <i class="bi bi-credit-card"></i>
             </div>
 
-            <div>
+            <h2 class="fw-bold mb-1">
+                Payments
+            </h2>
 
-                <h2 class="fw-bold mb-1">
-                    Payments
-                </h2>
-
-                <p class="text-muted mb-0">
-                    Manage repair payments and transactions.
-                </p>
-
-            </div>
+            <p class="text-muted mb-0">
+                View and manage all repair payments.
+            </p>
 
         </div>
-
-        <a asp-action="Create"
-           class="btn btn-primary px-4">
-
-            <i class="bi bi-plus-lg me-2"></i>
-            Add Payment
-
-        </a>
 
     </div>
 
 
-    <!-- Payments Table -->
-
+    <!-- PAYMENTS TABLE -->
     <div class="card form-card border-0">
 
         <div class="card-body p-0">
@@ -54,10 +40,9 @@
             {
                     <div class="table-responsive">
 
-                        <table class="table table-hover align-middle mb-0 customers-table">
+                        <table class="table table-hover align-middle mb-0">
 
                             <thead>
-
                                 <tr>
 
                                     <th>ID</th>
@@ -66,16 +51,15 @@
 
                                     <th>Amount</th>
 
-                                    <th>Payment Date</th>
+                                    <th>Payment Method</th>
 
-                                    <th>Method</th>
+                                    <th>Payment Date</th>
 
                                     <th class="text-center">
                                         Actions
                                     </th>
 
                                 </tr>
-
                             </thead>
 
 
@@ -86,62 +70,73 @@
                                         <tr>
 
                                             <!-- ID -->
-
                                             <td>
-
                                                 <span class="customer-id">
                                                     #@item.PaymentId
                                                 </span>
+                                            </td>
+
+
+                                            <!-- REPAIR ORDER -->
+                                            <td>
+
+                                        @if (item.RepairOrder != null)
+                                        {
+                                                        <span class="fw-semibold">
+                                                            Order #@item.RepairOrder.RepairOrderId
+                                                        </span>
+                                        }
+                                        else
+                                        {
+                                                        <span class="text-muted">
+                                                            No Order
+                                                        </span>
+                                        }
 
                                             </td>
 
 
-                                            <!-- Repair Order -->
-
+                                            <!-- AMOUNT -->
                                             <td>
 
                                                 <span class="fw-semibold">
-                                                    Repair Order #@item.RepairOrderId
+                                            @item.Amount.ToString("0.00") EGP
                                                 </span>
 
                                             </td>
 
 
-                                            <!-- Amount -->
-
+                                            <!-- PAYMENT METHOD -->
                                             <td>
 
-                                                <span class="fw-bold text-success">
-                                            @item.Amount.ToString("C")
-                                                </span>
+                                        @if (item.PaymentMethod == "Cash")
+                                        {
+                                                        <span class="badge bg-success">
+                                                            <i class="bi bi-cash me-1"></i>
+                                                            Cash
+                                                        </span>
+                                        }
+                                        else
+                                        {
+                                                        <span class="badge bg-primary">
+                                                @item.PaymentMethod
+                                                        </span>
+                                        }
 
                                             </td>
 
 
-                                            <!-- Payment Date -->
-
+                                            <!-- PAYMENT DATE -->
                                             <td>
 
                                                 <i class="bi bi-calendar3 me-1 text-muted"></i>
 
-                                        @item.PaymentDate.ToString("dd MMM yyyy")
+                                        @item.PaymentDate.ToString("dd/MM/yyyy")
 
                                             </td>
 
 
-                                            <!-- Payment Method -->
-
-                                            <td>
-
-                                                <span class="badge bg-primary">
-                                            @item.PaymentMethod
-                                                </span>
-
-                                            </td>
-
-
-                                            <!-- Actions -->
-
+                                            <!-- ACTIONS -->
                                             <td>
 
                                                 <div class="d-flex
@@ -192,31 +187,19 @@
             }
             else
             {
-                    <!-- Empty State -->
-
                     <div class="text-center py-5">
 
                         <div class="empty-icon mb-3">
-
                             <i class="bi bi-credit-card"></i>
-
                         </div>
 
                         <h4 class="fw-bold">
                             No Payments Found
                         </h4>
 
-                        <p class="text-muted">
-                            You haven't added any payments yet.
+                        <p class="text-muted mb-0">
+                            No payments have been recorded yet.
                         </p>
-
-                        <a asp-action="Create"
-                           class="btn btn-primary px-4">
-
-                            <i class="bi bi-plus-lg me-2"></i>
-                            Add Your First Payment
-
-                        </a>
 
                     </div>
             }

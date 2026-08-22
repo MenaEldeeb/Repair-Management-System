@@ -1,383 +1,236 @@
 ﻿@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
     ViewData["Title"] = "Home";
 }
 
-<div class="dashboard-page">
+
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
+
+<section class="py-5 bg-light">
 
     <div class="container py-5">
 
-        <!-- =========================
-             HEADER
-        ========================== -->
+        <div class="row align-items-center g-5">
 
-        <div class="dashboard-header mb-5">
 
-            <div>
+            <!-- HERO CONTENT -->
 
-                <div class="dashboard-label">
-                    REPAIR MANAGEMENT SYSTEM
-                </div>
+            <div class="col-lg-7">
 
-                <h1>
-                    Welcome back 👋
+                <span class="badge bg-primary px-3 py-2 mb-3">
+
+                    <i class="bi bi-tools me-1"></i>
+
+                    PROFESSIONAL DEVICE REPAIR
+
+                </span>
+
+
+                <h1 class="display-3 fw-bold lh-1 mb-4">
+
+                    Your Device.
+                    <span class="text-primary">
+                        Our Expertise.
+                    </span>
+
                 </h1>
 
-                <p>
-                    Manage your repair shop from one simple dashboard.
+
+                <p class="lead text-secondary mb-4">
+
+                    Fast, reliable and professional repair
+                    services for your laptops and computers.
+
                 </p>
 
-            </div>
 
-            <a asp-controller="RepairOrders"
-               asp-action="Create"
-               class="dashboard-add-btn">
+                <!-- BUTTONS -->
 
-                <i class="bi bi-plus-lg"></i>
+                <div class="d-flex flex-wrap gap-3">
 
-                New Repair Order
+                    <a asp-controller="CustomerRepair"
+                       asp-action="RequestRepair"
+                       class="btn btn-primary btn-lg px-4">
 
-            </a>
+                        <i class="bi bi-tools me-2"></i>
 
-        </div>
+                        Book a Repair
+
+                    </a>
 
 
-        <!-- =========================
-             STATISTICS
-        ========================== -->
+                    <a asp-controller="CustomerRepair"
+                       asp-action="Track"
+                       class="btn btn-outline-dark btn-lg px-4">
 
-        <div class="row g-4 mb-4">
+                        <i class="bi bi-search me-2"></i>
 
-            <!-- Customers -->
+                        Track Repair
 
-            <div class="col-12 col-sm-6 col-lg-3">
+                    </a>
 
-                <a asp-controller="Customers"
-                   asp-action="Index"
-                   class="stat-card-link">
+                </div>
 
-                    <div class="stat-card">
 
-                        <div class="stat-icon">
-                            <i class="bi bi-people"></i>
-                        </div>
+                <!-- QUICK INFO -->
 
-                        <div class="stat-content">
+                <div class="row g-3 mt-4">
 
-                            <span>
-                                CUSTOMERS
+                    <div class="col-sm-6">
+
+                        <div class="d-flex align-items-center">
+
+                            <i class="bi bi-check-circle-fill
+                                      text-success fs-5 me-2"></i>
+
+                            <span class="text-muted">
+
+                                Professional Service
+
                             </span>
 
-                            <h3>
-                                —
-                            </h3>
-
-                            <small>
-                                Manage customers
-                            </small>
-
                         </div>
 
                     </div>
 
-                </a>
 
-            </div>
+                    <div class="col-sm-6">
 
+                        <div class="d-flex align-items-center">
 
-            <!-- Devices -->
+                            <i class="bi bi-lightning-fill
+                                      text-warning fs-5 me-2"></i>
 
-            <div class="col-12 col-sm-6 col-lg-3">
+                            <span class="text-muted">
 
-                <a asp-controller="Devices"
-                   asp-action="Index"
-                   class="stat-card-link">
+                                Fast Repair
 
-                    <div class="stat-card">
-
-                        <div class="stat-icon">
-                            <i class="bi bi-laptop"></i>
-                        </div>
-
-                        <div class="stat-content">
-
-                            <span>
-                                DEVICES
                             </span>
 
-                            <h3>
-                                —
-                            </h3>
-
-                            <small>
-                                Registered devices
-                            </small>
-
                         </div>
 
                     </div>
 
-                </a>
+                </div>
 
             </div>
 
 
-            <!-- Repair Orders -->
+            <!-- HERO CARD -->
 
-            <div class="col-12 col-sm-6 col-lg-3">
+            <div class="col-lg-5">
 
-                <a asp-controller="RepairOrders"
-                   asp-action="Index"
-                   class="stat-card-link">
+                <div class="card border-0 shadow-lg
+                            rounded-4 repair-card">
 
-                    <div class="stat-card">
+                    <div class="card-body p-5 text-center">
 
-                        <div class="stat-icon">
-                            <i class="bi bi-tools"></i>
-                        </div>
 
-                        <div class="stat-content">
+                        <!-- ICON -->
 
-                            <span>
-                                REPAIR ORDERS
-                            </span>
+                        <div class="bg-primary bg-opacity-10
+                                    text-primary rounded-circle
+                                    d-inline-flex
+                                    align-items-center
+                                    justify-content-center
+                                    mb-4"
+                             style="width:100px;height:100px;">
 
-                            <h3>
-                                —
-                            </h3>
-
-                            <small>
-                                Active repair orders
-                            </small>
+                            <i class="bi bi-laptop display-5"></i>
 
                         </div>
 
-                    </div>
 
-                </a>
+                        <small class="text-primary fw-bold">
 
-            </div>
+                            REPAIRHUB
+
+                        </small>
 
 
-            <!-- Technicians -->
+                        <h3 class="fw-bold mt-2">
 
-            <div class="col-12 col-sm-6 col-lg-3">
+                            Repair Center
 
-                <a asp-controller="Technicians"
-                   asp-action="Index"
-                   class="stat-card-link">
+                        </h3>
 
-                    <div class="stat-card">
 
-                        <div class="stat-icon">
-                            <i class="bi bi-person-gear"></i>
+                        <p class="text-muted">
+
+                            Tell us what's wrong with your device
+                            and our professional technicians will
+                            take care of it.
+
+                        </p>
+
+
+                        <hr class="my-4" />
+
+
+                        <!-- FEATURES -->
+
+                        <div class="text-start">
+
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <i class="bi bi-check-circle-fill
+                                          text-success fs-5 me-3"></i>
+
+                                <span>
+
+                                    Professional Technicians
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <i class="bi bi-check-circle-fill
+                                          text-success fs-5 me-3"></i>
+
+                                <span>
+
+                                    Fast & Reliable Service
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="d-flex align-items-center">
+
+                                <i class="bi bi-check-circle-fill
+                                          text-success fs-5 me-3"></i>
+
+                                <span>
+
+                                    Easy Repair Tracking
+
+                                </span>
+
+                            </div>
+
                         </div>
 
-                        <div class="stat-content">
 
-                            <span>
-                                TECHNICIANS
-                            </span>
+                        <a asp-controller="CustomerRepair"
+                           asp-action="RequestRepair"
+                           class="btn btn-primary w-100 mt-4">
 
-                            <h3>
-                                —
-                            </h3>
+                            <i class="bi bi-plus-circle me-2"></i>
 
-                            <small>
-                                Repair technicians
-                            </small>
+                            Start Your Repair
 
-                        </div>
+                        </a>
 
                     </div>
 
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             MANAGEMENT
-        ========================== -->
-
-        <div class="dashboard-card">
-
-            <div class="card-header-custom">
-
-                <h4>
-                    Repair Management
-                </h4>
-
-                <p>
-                    Access the main sections of your system.
-                </p>
-
-            </div>
-
-
-            <div class="management-list">
-
-                <!-- Customers -->
-
-                <a asp-controller="Customers"
-                   asp-action="Index"
-                   class="management-item">
-
-                    <div class="management-icon">
-                        <i class="bi bi-people"></i>
-                    </div>
-
-                    <div class="management-info">
-
-                        <h6>
-                            Customers
-                        </h6>
-
-                        <p>
-                            View and manage customer information
-                        </p>
-
-                    </div>
-
-                    <i class="bi bi-chevron-right arrow"></i>
-
-                </a>
-
-
-                <!-- Devices -->
-
-                <a asp-controller="Devices"
-                   asp-action="Index"
-                   class="management-item">
-
-                    <div class="management-icon">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-
-                    <div class="management-info">
-
-                        <h6>
-                            Devices
-                        </h6>
-
-                        <p>
-                            Manage customer devices and problems
-                        </p>
-
-                    </div>
-
-                    <i class="bi bi-chevron-right arrow"></i>
-
-                </a>
-
-
-                <!-- Technicians -->
-
-                <a asp-controller="Technicians"
-                   asp-action="Index"
-                   class="management-item">
-
-                    <div class="management-icon">
-                        <i class="bi bi-person-gear"></i>
-                    </div>
-
-                    <div class="management-info">
-
-                        <h6>
-                            Technicians
-                        </h6>
-
-                        <p>
-                            Manage technicians and specializations
-                        </p>
-
-                    </div>
-
-                    <i class="bi bi-chevron-right arrow"></i>
-
-                </a>
-
-
-                <!-- Repair Orders -->
-
-                <a asp-controller="RepairOrders"
-                   asp-action="Index"
-                   class="management-item">
-
-                    <div class="management-icon">
-                        <i class="bi bi-tools"></i>
-                    </div>
-
-                    <div class="management-info">
-
-                        <h6>
-                            Repair Orders
-                        </h6>
-
-                        <p>
-                            Track and manage repair operations
-                        </p>
-
-                    </div>
-
-                    <i class="bi bi-chevron-right arrow"></i>
-
-                </a>
-
-
-                <!-- Payments -->
-
-                <a asp-controller="Payments"
-                   asp-action="Index"
-                   class="management-item">
-
-                    <div class="management-icon">
-                        <i class="bi bi-credit-card"></i>
-                    </div>
-
-                    <div class="management-info">
-
-                        <h6>
-                            Payments
-                        </h6>
-
-                        <p>
-                            Manage repair payments and transactions
-                        </p>
-
-                    </div>
-
-                    <i class="bi bi-chevron-right arrow"></i>
-
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             SYSTEM STATUS
-        ========================== -->
-
-        <div class="system-info mt-4">
-
-            <div class="system-info-icon">
-
-                <i class="bi bi-check-lg"></i>
-
-            </div>
-
-            <div>
-
-                <h6>
-                    System Ready
-                </h6>
-
-                <p>
-                    Your repair management system is ready to use.
-                </p>
+                </div>
 
             </div>
 
@@ -385,4 +238,690 @@
 
     </div>
 
-</div>
+</section>
+
+
+
+<!-- =========================================================
+     SERVICES
+========================================================= -->
+
+<section class="py-5"
+         id="services">
+
+    <div class="container py-4">
+
+
+        <!-- TITLE -->
+
+        <div class="text-center mb-5">
+
+            <span class="text-primary fw-bold small">
+
+                OUR SERVICES
+
+            </span>
+
+
+            <h2 class="fw-bold mt-2">
+
+                What Can We Repair?
+
+            </h2>
+
+
+            <p class="text-muted mx-auto"
+               style="max-width:600px;">
+
+                Professional solutions for your laptop
+                and computer problems.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            <!-- LAPTOP REPAIR -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card border-0 shadow-sm
+                            rounded-4 h-100 service-card">
+
+                    <div class="card-body p-4 text-center">
+
+
+                        <div class="bg-primary bg-opacity-10
+                                    text-primary rounded-4
+                                    d-inline-flex
+                                    align-items-center
+                                    justify-content-center
+                                    mb-4"
+                             style="width:75px;height:75px;">
+
+                            <i class="bi bi-laptop fs-2"></i>
+
+                        </div>
+
+
+                        <h5 class="fw-bold">
+
+                            Laptop Repair
+
+                        </h5>
+
+
+                        <p class="text-muted small">
+
+                            Diagnose and repair laptop
+                            hardware and common issues.
+
+                        </p>
+
+
+                        <a asp-controller="CustomerRepair"
+                           asp-action="RequestRepair"
+                           class="btn btn-outline-primary btn-sm mt-2">
+
+                            Request Repair
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DESKTOP REPAIR -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card border-0 shadow-sm
+                            rounded-4 h-100 service-card">
+
+                    <div class="card-body p-4 text-center">
+
+
+                        <div class="bg-primary bg-opacity-10
+                                    text-primary rounded-4
+                                    d-inline-flex
+                                    align-items-center
+                                    justify-content-center
+                                    mb-4"
+                             style="width:75px;height:75px;">
+
+                            <i class="bi bi-pc-display fs-2"></i>
+
+                        </div>
+
+
+                        <h5 class="fw-bold">
+
+                            Desktop Repair
+
+                        </h5>
+
+
+                        <p class="text-muted small">
+
+                            Hardware diagnosis, upgrades
+                            and desktop troubleshooting.
+
+                        </p>
+
+
+                        <a asp-controller="CustomerRepair"
+                           asp-action="RequestRepair"
+                           class="btn btn-outline-primary btn-sm mt-2">
+
+                            Request Repair
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HARDWARE REPAIR -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card border-0 shadow-sm
+                            rounded-4 h-100 service-card">
+
+                    <div class="card-body p-4 text-center">
+
+
+                        <div class="bg-primary bg-opacity-10
+                                    text-primary rounded-4
+                                    d-inline-flex
+                                    align-items-center
+                                    justify-content-center
+                                    mb-4"
+                             style="width:75px;height:75px;">
+
+                            <i class="bi bi-cpu fs-2"></i>
+
+                        </div>
+
+
+                        <h5 class="fw-bold">
+
+                            Hardware Repair
+
+                        </h5>
+
+
+                        <p class="text-muted small">
+
+                            Component replacement,
+                            upgrades and hardware fixes.
+
+                        </p>
+
+
+                        <a asp-controller="CustomerRepair"
+                           asp-action="RequestRepair"
+                           class="btn btn-outline-primary btn-sm mt-2">
+
+                            Request Repair
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SOFTWARE REPAIR -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card border-0 shadow-sm
+                            rounded-4 h-100 service-card">
+
+                    <div class="card-body p-4 text-center">
+
+
+                        <div class="bg-primary bg-opacity-10
+                                    text-primary rounded-4
+                                    d-inline-flex
+                                    align-items-center
+                                    justify-content-center
+                                    mb-4"
+                             style="width:75px;height:75px;">
+
+                            <i class="bi bi-gear fs-2"></i>
+
+                        </div>
+
+
+                        <h5 class="fw-bold">
+
+                            Software Repair
+
+                        </h5>
+
+
+                        <p class="text-muted small">
+
+                            Operating system, software
+                            and system troubleshooting.
+
+                        </p>
+
+
+                        <a asp-controller="CustomerRepair"
+                           asp-action="RequestRepair"
+                           class="btn btn-outline-primary btn-sm mt-2">
+
+                            Request Repair
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section class="py-5 bg-light"
+         id="how-it-works">
+
+    <div class="container py-4">
+
+
+        <!-- TITLE -->
+
+        <div class="text-center mb-5">
+
+            <span class="text-primary fw-bold small">
+
+                HOW IT WORKS
+
+            </span>
+
+
+            <h2 class="fw-bold mt-2">
+
+                Get Your Device Repaired
+
+            </h2>
+
+
+            <p class="text-muted">
+
+                A simple process from request to repair.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            <!-- STEP 1 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="bg-white rounded-4 shadow-sm
+                            p-4 h-100 text-center step-card">
+
+
+                    <div class="bg-primary text-white
+                                rounded-circle
+                                d-inline-flex
+                                align-items-center
+                                justify-content-center
+                                mb-4"
+                         style="width:65px;height:65px;">
+
+                        <strong class="fs-5">
+
+                            01
+
+                        </strong>
+
+                    </div>
+
+
+                    <h5 class="fw-bold">
+
+                        Submit Request
+
+                    </h5>
+
+
+                    <p class="text-muted small mb-0">
+
+                        Tell us about your device
+                        and its problem.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STEP 2 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="bg-white rounded-4 shadow-sm
+                            p-4 h-100 text-center step-card">
+
+
+                    <div class="bg-primary text-white
+                                rounded-circle
+                                d-inline-flex
+                                align-items-center
+                                justify-content-center
+                                mb-4"
+                         style="width:65px;height:65px;">
+
+                        <strong class="fs-5">
+
+                            02
+
+                        </strong>
+
+                    </div>
+
+
+                    <h5 class="fw-bold">
+
+                        Diagnosis
+
+                    </h5>
+
+
+                    <p class="text-muted small mb-0">
+
+                        Our technician checks
+                        your device carefully.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STEP 3 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="bg-white rounded-4 shadow-sm
+                            p-4 h-100 text-center step-card">
+
+
+                    <div class="bg-primary text-white
+                                rounded-circle
+                                d-inline-flex
+                                align-items-center
+                                justify-content-center
+                                mb-4"
+                         style="width:65px;height:65px;">
+
+                        <strong class="fs-5">
+
+                            03
+
+                        </strong>
+
+                    </div>
+
+
+                    <h5 class="fw-bold">
+
+                        We Repair
+
+                    </h5>
+
+
+                    <p class="text-muted small mb-0">
+
+                        Our professional team
+                        fixes the problem.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STEP 4 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="bg-white rounded-4 shadow-sm
+                            p-4 h-100 text-center step-card">
+
+
+                    <div class="bg-success text-white
+                                rounded-circle
+                                d-inline-flex
+                                align-items-center
+                                justify-content-center
+                                mb-4"
+                         style="width:65px;height:65px;">
+
+                        <strong class="fs-5">
+
+                            04
+
+                        </strong>
+
+                    </div>
+
+
+                    <h5 class="fw-bold">
+
+                        Get Your Device
+
+                    </h5>
+
+
+                    <p class="text-muted small mb-0">
+
+                        Collect your repaired
+                        device when ready.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="py-5">
+
+    <div class="container py-4">
+
+        <div class="bg-dark text-white
+                    rounded-4 shadow-lg
+                    p-5 text-center cta-section">
+
+
+            <div class="bg-primary bg-opacity-10
+                        rounded-circle
+                        d-inline-flex
+                        align-items-center
+                        justify-content-center
+                        mb-3"
+                 style="width:75px;height:75px;">
+
+                <i class="bi bi-tools text-primary fs-2"></i>
+
+            </div>
+
+
+            <h2 class="fw-bold">
+
+                Ready to Fix Your Device?
+
+            </h2>
+
+
+            <p class="text-white-50 mb-4">
+
+                Submit your repair request and let our
+                professional technicians help you.
+
+            </p>
+
+
+            <a asp-controller="CustomerRepair"
+               asp-action="RequestRepair"
+               class="btn btn-primary btn-lg px-5">
+
+                <i class="bi bi-plus-circle me-2"></i>
+
+                Request a Repair
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     HOVER EFFECTS
+========================================================= -->
+
+<style>
+
+    /* =========================
+       SERVICE CARDS
+    ========================== */
+
+    .service-card {
+
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+        cursor: pointer;
+
+    }
+
+
+    .service-card:hover {
+
+        transform: translateY(-10px);
+
+        box-shadow:
+            0 1rem 2rem rgba(0, 0, 0, 0.12) !important;
+
+    }
+
+
+    .service-card i {
+
+        transition:
+            transform 0.3s ease;
+
+    }
+
+
+    .service-card:hover i {
+
+        transform: scale(1.15);
+
+    }
+
+
+    /* =========================
+       HERO CARD
+    ========================== */
+
+    .repair-card {
+
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+    }
+
+
+    .repair-card:hover {
+
+        transform: translateY(-8px);
+
+        box-shadow:
+            0 1rem 2rem rgba(0, 0, 0, 0.15) !important;
+
+    }
+
+
+    /* =========================
+       STEP CARDS
+    ========================== */
+
+    .step-card {
+
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+    }
+
+
+    .step-card:hover {
+
+        transform: translateY(-8px);
+
+        box-shadow:
+            0 1rem 1.5rem rgba(0, 0, 0, 0.12) !important;
+
+    }
+
+
+    /* =========================
+       BUTTONS
+    ========================== */
+
+    .btn {
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+
+    }
+
+
+    .btn:hover {
+
+        transform: translateY(-2px);
+
+    }
+
+
+    /* =========================
+       CTA
+    ========================== */
+
+    .cta-section {
+
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+    }
+
+
+    .cta-section:hover {
+
+        transform: translateY(-4px);
+
+    }
+
+</style>

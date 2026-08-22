@@ -1,0 +1,185 @@
+﻿@model FinalProject.Models.Payment
+
+@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Payment Details";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <!-- HEADER -->
+
+            <div class="text-center mb-4">
+
+                <div class="display-5 text-primary mb-3">
+                    <i class="bi bi-credit-card"></i>
+                </div>
+
+                <h2 class="fw-bold">
+                    Payment Details
+                </h2>
+
+                <p class="text-muted">
+                    View your payment information.
+                </p>
+
+            </div>
+
+
+            <!-- PAYMENT CARD -->
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body p-4 p-md-5">
+
+
+                    <!-- PAYMENT ID -->
+
+                    <div class="p-3 border rounded mb-3">
+
+                        <small class="text-muted d-block mb-1">
+                            Payment ID
+                        </small>
+
+                        <strong>
+                            #@Model.PaymentId
+                        </strong>
+
+                    </div>
+
+
+                    <!-- REPAIR ORDER -->
+
+                    <div class="p-3 border rounded mb-3">
+
+                        <small class="text-muted d-block mb-1">
+
+                            <i class="bi bi-tools me-1"></i>
+
+                            Repair Order
+
+                        </small>
+
+                        <strong>
+                            #@Model.RepairOrderId
+                        </strong>
+
+                    </div>
+
+
+                    <!-- AMOUNT -->
+
+                    <div class="p-3 border rounded mb-3">
+
+                        <small class="text-muted d-block mb-1">
+
+                            <i class="bi bi-cash-stack me-1"></i>
+
+                            Amount
+
+                        </small>
+
+                        <strong class="text-success fs-5">
+
+                            @Model.Amount.ToString("0.00") EGP
+
+                        </strong>
+
+                    </div>
+
+
+                    <!-- PAYMENT METHOD -->
+
+                    <div class="p-3 border rounded mb-3">
+
+                        <small class="text-muted d-block mb-1">
+
+                            <i class="bi bi-wallet2 me-1"></i>
+
+                            Payment Method
+
+                        </small>
+
+                        <span class="badge bg-primary fs-6">
+
+                            @Model.PaymentMethod
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- PAYMENT DATE -->
+
+                    <div class="p-3 border rounded mb-4">
+
+                        <small class="text-muted d-block mb-1">
+
+                            <i class="bi bi-calendar3 me-1"></i>
+
+                            Payment Date
+
+                        </small>
+
+                        <strong>
+
+                            @Model.PaymentDate.ToString("dd/MM/yyyy")
+
+                        </strong>
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="d-flex flex-column
+                                flex-sm-row
+                                justify-content-between
+                                gap-2">
+
+
+                        <!-- BACK -->
+
+                        <a asp-controller="CustomerRepair"
+                           asp-action="TrackResult"
+                           asp-route-id="@Model.RepairOrderId"
+                           asp-route-phone="@Model.RepairOrder?.Device?.Customer?.Phone"
+                           class="btn btn-light px-4">
+
+                            <i class="bi bi-arrow-left me-2"></i>
+
+                            Back to Repair
+
+                        </a>
+
+
+                        <!-- EDIT -->
+
+                        <a asp-controller="CustomerPayment"
+                           asp-action="Edit"
+                           asp-route-id="@Model.PaymentId"
+                           asp-route-repairOrderId="@Model.RepairOrderId"
+                           asp-route-phone="@Model.RepairOrder?.Device?.Customer?.Phone"
+                           class="btn btn-primary px-4">
+
+                            <i class="bi bi-pencil-square me-2"></i>
+
+                            Edit Payment
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

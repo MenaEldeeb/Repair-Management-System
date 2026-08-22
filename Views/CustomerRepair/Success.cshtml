@@ -1,0 +1,90 @@
+﻿@model FinalProject.Models.RepairOrder
+
+@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Request Submitted";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body text-center p-5">
+
+                    <div class="mb-4">
+
+                        <div class="bg-success bg-opacity-10
+                                    text-success rounded-circle
+                                    d-inline-flex align-items-center
+                                    justify-content-center"
+                             style="width:80px;height:80px;">
+
+                            <i class="bi bi-check-lg fs-1"></i>
+
+                        </div>
+
+                    </div>
+
+                    <h1 class="fw-bold mb-3">
+                        Request Submitted!
+                    </h1>
+
+                    <p class="text-muted mb-4">
+                        Your repair request has been successfully received.
+                    </p>
+
+                    <div class="bg-light rounded-4 p-4 mb-4">
+
+                        <p class="small text-muted fw-semibold mb-2">
+                            YOUR REPAIR ORDER NUMBER
+                        </p>
+
+                        <div class="display-5 fw-bold text-primary">
+                            #@Model.RepairOrderId
+                        </div>
+
+                        <p class="small text-muted mb-0 mt-2">
+                            Please keep this number.
+                            You can use it to track your repair.
+                        </p>
+
+                    </div>
+
+                    @if (Model.Cost > 0)
+                    {
+                            <a asp-controller="Payments"
+                               asp-action="Create"
+                               asp-route-repairOrderId="@Model.RepairOrderId"
+                               class="btn btn-primary btn-lg px-4">
+
+                                <i class="bi bi-credit-card me-2"></i>
+
+                                Continue to Payment
+
+                            </a>
+                    }
+                    else
+                    {
+                            <div class="alert alert-info rounded-3">
+
+                                <i class="bi bi-info-circle me-2"></i>
+
+                                Payment will be available after
+                                the repair cost is confirmed.
+
+                            </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

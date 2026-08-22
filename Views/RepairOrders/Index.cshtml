@@ -1,4 +1,5 @@
-﻿@model IEnumerable<FinalProject.Models.RepairOrder>
+﻿
+@model IEnumerable<FinalProject.Models.RepairOrder>
 
 @{
     ViewData["Title"] = "Repair Orders";
@@ -6,11 +7,10 @@
 
 <div class="container py-5">
 
-    <!-- Page Header -->
+    <!-- PAGE HEADER -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
 
-        <div class="text-center text-md-start">
-
+        <div>
             <div class="page-icon mb-3">
                 <i class="bi bi-tools"></i>
             </div>
@@ -22,27 +22,20 @@
             <p class="text-muted mb-0">
                 Manage repair orders and service information.
             </p>
-
         </div>
 
-        <div class="text-center">
-
-            <a asp-action="Create"
-               class="btn btn-primary px-4">
-
+        <div>
+            <a asp-action="Create" class="btn btn-primary px-4">
                 <i class="bi bi-plus-lg me-2"></i>
                 Add Repair Order
-
             </a>
-
         </div>
 
     </div>
 
 
-    <!-- Repair Orders Table -->
-
-    <div class="card form-card border-0">
+    <!-- TABLE -->
+    <div class="card border-0 shadow-sm">
 
         <div class="card-body p-0">
 
@@ -52,26 +45,44 @@
 
                         <table class="table table-hover align-middle mb-0">
 
-                            <thead>
+                            <thead class="table-light">
+
                                 <tr>
 
-                                    <th>ID</th>
+                                    <th class="px-4">
+                                        ID
+                                    </th>
 
-                                    <th>Device</th>
+                                    <th>
+                                        Customer
+                                    </th>
 
-                                    <th>Technician</th>
+                                    <th>
+                                        Device
+                                    </th>
 
-                                    <th>Receive Date</th>
+                                    <th>
+                                        Technician
+                                    </th>
 
-                                    <th>Status</th>
+                                    <th>
+                                        Receive Date
+                                    </th>
 
-                                    <th>Cost</th>
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Cost
+                                    </th>
 
                                     <th class="text-center">
                                         Actions
                                     </th>
 
                                 </tr>
+
                             </thead>
 
                             <tbody>
@@ -80,20 +91,60 @@
                             {
                                         <tr>
 
-                                            <td>
-                                                <span class="customer-id">
+                                            <!-- ID -->
+                                            <td class="px-4">
+
+                                                <span class="badge bg-light text-dark border">
                                                     #@item.RepairOrderId
                                                 </span>
+
                                             </td>
 
 
+                                            <!-- CUSTOMER -->
+                                            <td>
+
+                                        @if (item.Device?.Customer != null)
+                                        {
+                                                        <div>
+                                                            <div class="fw-semibold">
+                                                    @item.Device.Customer.Fname
+                                                    @item.Device.Customer.Lname
+                                                            </div>
+
+                                                            <small class="text-muted">
+                                                                <i class="bi bi-telephone me-1"></i>
+                                                    @item.Device.Customer.Phone
+                                                            </small>
+                                                        </div>
+                                        }
+                                        else
+                                        {
+                                                        <span class="text-muted">
+                                                            No Customer
+                                                        </span>
+                                        }
+
+                                            </td>
+
+
+                                            <!-- DEVICE -->
                                             <td>
 
                                         @if (item.Device != null)
                                         {
-                                                        <span class="fw-semibold">
-                                                @item.Device.DeviceName
-                                                        </span>
+                                                        <div>
+
+                                                            <div class="fw-semibold">
+                                                    @item.Device.DeviceName
+                                                            </div>
+
+                                                            <small class="text-muted">
+                                                                <i class="bi bi-laptop me-1"></i>
+                                                    @item.Device.DeviceType
+                                                            </small>
+
+                                                        </div>
                                         }
                                         else
                                         {
@@ -105,6 +156,7 @@
                                             </td>
 
 
+                                            <!-- TECHNICIAN -->
                                             <td>
 
                                         @if (item.Technician != null)
@@ -123,32 +175,41 @@
                                             </td>
 
 
+                                            <!-- RECEIVE DATE -->
                                             <td>
 
-                                                <i class="bi bi-calendar3 me-1 text-muted"></i>
+                                                <div class="text-nowrap">
 
-                                        @item.ReceiveDate.ToString("dd/MM/yyyy")
+                                                    <i class="bi bi-calendar3 me-1 text-muted"></i>
+
+                                            @item.ReceiveDate.ToString("dd/MM/yyyy")
+
+                                                </div>
 
                                             </td>
 
 
+                                            <!-- STATUS -->
                                             <td>
 
                                         @if (item.Status == "Pending")
                                         {
                                                         <span class="badge bg-warning text-dark">
+                                                            <i class="bi bi-clock me-1"></i>
                                                             Pending
                                                         </span>
                                         }
                                         else if (item.Status == "In Progress")
                                         {
                                                         <span class="badge bg-info text-dark">
+                                                            <i class="bi bi-wrench me-1"></i>
                                                             In Progress
                                                         </span>
                                         }
                                         else if (item.Status == "Completed")
                                         {
                                                         <span class="badge bg-success">
+                                                            <i class="bi bi-check-circle me-1"></i>
                                                             Completed
                                                         </span>
                                         }
@@ -162,43 +223,42 @@
                                             </td>
 
 
+                                            <!-- COST -->
                                             <td>
 
-                                                <span class="fw-semibold">
-                                            @item.Cost.ToString("0.00")
+                                                <span class="fw-semibold text-nowrap">
+                                            @item.Cost.ToString("0.00") EGP
                                                 </span>
 
                                             </td>
 
 
+                                            <!-- ACTIONS -->
                                             <td>
 
-                                                <div class="d-flex justify-content-center gap-2">
+                                                <div class="d-flex justify-content-center gap-1 flex-wrap">
 
                                                     <a asp-action="Details"
                                                        asp-route-id="@item.RepairOrderId"
-                                                       class="btn btn-info action-btn">
+                                                       class="btn btn-info btn-sm">
 
-                                                        <i class="bi bi-eye me-1"></i>
-                                                        Details
+                                                        <i class="bi bi-eye"></i>
 
                                                     </a>
 
                                                     <a asp-action="Edit"
                                                        asp-route-id="@item.RepairOrderId"
-                                                       class="btn btn-warning action-btn">
+                                                       class="btn btn-warning btn-sm">
 
-                                                        <i class="bi bi-pencil-square me-1"></i>
-                                                        Edit
+                                                        <i class="bi bi-pencil"></i>
 
                                                     </a>
 
                                                     <a asp-action="Delete"
                                                        asp-route-id="@item.RepairOrderId"
-                                                       class="btn btn-danger action-btn">
+                                                       class="btn btn-danger btn-sm">
 
-                                                        <i class="bi bi-trash me-1"></i>
-                                                        Delete
+                                                        <i class="bi bi-trash"></i>
 
                                                     </a>
 
@@ -217,6 +277,8 @@
             }
             else
             {
+                    <!-- EMPTY STATE -->
+
                     <div class="text-center py-5">
 
                         <div class="empty-icon mb-3">
@@ -247,3 +309,4 @@
     </div>
 
 </div>
+

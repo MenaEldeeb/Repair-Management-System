@@ -1,0 +1,108 @@
+﻿@model FinalProject.Models.RepairOrder
+
+@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Edit Repair Request";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <h2 class="fw-bold mb-4">
+                        Edit Repair Request
+                    </h2>
+
+                    <form asp-action="Edit" method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden"
+                               name="id"
+                               value="@Model.RepairOrderId" />
+
+                        <input type="hidden"
+                               name="phone"
+                               value="@Model.Device?.Customer?.Phone" />
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Device Name
+                            </label>
+
+                            <input name="deviceName"
+                                   value="@Model.Device?.DeviceName"
+                                   class="form-control" />
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Device Type
+                            </label>
+
+                            <input name="deviceType"
+                                   value="@Model.Device?.DeviceType"
+                                   class="form-control" />
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Serial Number
+                            </label>
+
+                            <input name="serialNumber"
+                                   value="@Model.Device?.SerialNumber"
+                                   class="form-control" />
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Problem
+                            </label>
+
+                            <textarea name="problem"
+                                      class="form-control"
+                                      rows="4">@Model.Description</textarea>
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+
+                            <i class="bi bi-check-lg me-1"></i>
+
+                            Save Changes
+
+                        </button>
+
+                        <a asp-action="Track"
+                           class="btn btn-outline-secondary w-100 mt-2">
+
+                            Back
+
+                        </a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div></div>

@@ -1,9 +1,10 @@
 ﻿using FinalProject.BusinessLayer;
 using FinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using FinalProject.Filters;
 namespace FinalProject.Controllers
 {
+    [AdminOnly]
     public class DevicesController : Controller
     {
         DeviceBL deviceBL = new DeviceBL();

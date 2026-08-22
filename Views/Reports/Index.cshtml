@@ -1,0 +1,541 @@
+﻿@{
+    ViewData["Title"] = "Reports";
+
+    var totalCustomers = ViewBag.TotalCustomers ?? 0;
+    var totalDevices = ViewBag.TotalDevices ?? 0;
+    var totalTechnicians = ViewBag.TotalTechnicians ?? 0;
+    var totalOrders = ViewBag.TotalOrders ?? 0;
+
+    var pending = ViewBag.Pending ?? 0;
+    var inProgress = ViewBag.InProgress ?? 0;
+    var ready = ViewBag.Ready ?? 0;
+
+    var totalPayments = ViewBag.TotalPayments ?? 0m;
+    var totalRepairCost = ViewBag.TotalRepairCost ?? 0m;
+
+    var totalStatus = pending + inProgress + ready;
+
+    var pendingPercent = totalStatus > 0
+        ? (pending * 100.0 / totalStatus)
+        : 0;
+
+    var progressPercent = totalStatus > 0
+        ? (inProgress * 100.0 / totalStatus)
+        : 0;
+
+    var readyPercent = totalStatus > 0
+        ? (ready * 100.0 / totalStatus)
+        : 0;
+}
+
+<div class="container-fluid py-4">
+
+    <!-- HEADER -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                <div>
+                    <span class="badge bg-primary mb-2">
+                        <i class="bi bi-bar-chart-line"></i>
+                        BUSINESS REPORTS
+                    </span>
+
+                    <h1 class="fw-bold mb-2">
+                        RepairHub Reports
+                    </h1>
+
+                    <p class="text-muted mb-0">
+                        Monitor your repair shop performance and statistics.
+                    </p>
+                </div>
+
+                <div>
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       class="btn btn-outline-primary">
+
+                        <i class="bi bi-house"></i>
+                        Dashboard
+
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- MAIN STATISTICS -->
+    <div class="row g-4 mb-4">
+
+        <!-- CUSTOMERS -->
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-3">
+                            <i class="bi bi-people fs-4"></i>
+                        </div>
+
+                        <div class="ms-3">
+
+                            <small class="text-muted">
+                                Customers
+                            </small>
+
+                            <h3 class="fw-bold mb-0">
+                                @totalCustomers
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <small class="text-muted d-block mt-3">
+                        Total registered customers
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DEVICES -->
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="bg-info bg-opacity-10 text-info rounded-3 p-3">
+                            <i class="bi bi-laptop fs-4"></i>
+                        </div>
+
+                        <div class="ms-3">
+
+                            <small class="text-muted">
+                                Devices
+                            </small>
+
+                            <h3 class="fw-bold mb-0">
+                                @totalDevices
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <small class="text-muted d-block mt-3">
+                        Total registered devices
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- REPAIR ORDERS -->
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="bg-warning bg-opacity-10 text-warning rounded-3 p-3">
+                            <i class="bi bi-tools fs-4"></i>
+                        </div>
+
+                        <div class="ms-3">
+
+                            <small class="text-muted">
+                                Repair Orders
+                            </small>
+
+                            <h3 class="fw-bold mb-0">
+                                @totalOrders
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <small class="text-muted d-block mt-3">
+                        Total repair orders
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TECHNICIANS -->
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="bg-success bg-opacity-10 text-success rounded-3 p-3">
+                            <i class="bi bi-person-gear fs-4"></i>
+                        </div>
+
+                        <div class="ms-3">
+
+                            <small class="text-muted">
+                                Technicians
+                            </small>
+
+                            <h3 class="fw-bold mb-0">
+                                @totalTechnicians
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <small class="text-muted d-block mt-3">
+                        Available technicians
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- REPAIR STATUS + FINANCIAL -->
+    <div class="row g-4 mb-4">
+
+        <!-- REPAIR STATUS -->
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-header bg-white border-0 pt-4 px-4">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <small class="text-primary fw-bold">
+                                REPAIR WORKFLOW
+                            </small>
+
+                            <h4 class="fw-bold mb-0 mt-1">
+                                Current repair status
+                            </h4>
+                        </div>
+
+                        <a asp-controller="RepairOrders"
+                           asp-action="Index"
+                           class="btn btn-sm btn-outline-primary">
+
+                            View all
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-body p-4">
+
+                    <div class="row g-3">
+
+                        <!-- PENDING -->
+                        <div class="col-md-4">
+
+                            <div class="border rounded-3 p-3 h-100">
+
+                                <div class="d-flex justify-content-between">
+
+                                    <div>
+
+                                        <small class="text-muted">
+                                            Pending
+                                        </small>
+
+                                        <h3 class="fw-bold mb-0">
+                                            @pending
+                                        </h3>
+
+                                    </div>
+
+                                    <span class="badge bg-warning text-dark">
+                                        <i class="bi bi-clock"></i>
+                                    </span>
+
+                                </div>
+
+                                <div class="progress mt-3"
+                                     style="height:6px;">
+
+                                    <div class="progress-bar bg-warning"
+                                         style="width:@pendingPercent%">
+                                    </div>
+
+                                </div>
+
+                                <small class="text-muted">
+                                    Waiting for repair
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- IN PROGRESS -->
+                        <div class="col-md-4">
+
+                            <div class="border rounded-3 p-3 h-100">
+
+                                <div class="d-flex justify-content-between">
+
+                                    <div>
+
+                                        <small class="text-muted">
+                                            In Progress
+                                        </small>
+
+                                        <h3 class="fw-bold mb-0">
+                                            @inProgress
+                                        </h3>
+
+                                    </div>
+
+                                    <span class="badge bg-primary">
+                                        <i class="bi bi-wrench"></i>
+                                    </span>
+
+                                </div>
+
+                                <div class="progress mt-3"
+                                     style="height:6px;">
+
+                                    <div class="progress-bar"
+                                         style="width:@progressPercent%">
+                                    </div>
+
+                                </div>
+
+                                <small class="text-muted">
+                                    Currently being repaired
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- READY -->
+                        <div class="col-md-4">
+
+                            <div class="border rounded-3 p-3 h-100">
+
+                                <div class="d-flex justify-content-between">
+
+                                    <div>
+
+                                        <small class="text-muted">
+                                            Ready for Collection
+                                        </small>
+
+                                        <h3 class="fw-bold mb-0">
+                                            @ready
+                                        </h3>
+
+                                    </div>
+
+                                    <span class="badge bg-success">
+                                        <i class="bi bi-check-circle"></i>
+                                    </span>
+
+                                </div>
+
+                                <div class="progress mt-3"
+                                     style="height:6px;">
+
+                                    <div class="progress-bar bg-success"
+                                         style="width:@readyPercent%">
+                                    </div>
+
+                                </div>
+
+                                <small class="text-muted">
+                                    Ready for customer
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FINANCIAL -->
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-header bg-white border-0 pt-4 px-4">
+
+                    <small class="text-success fw-bold">
+                        FINANCIAL OVERVIEW
+                    </small>
+
+                    <h4 class="fw-bold mb-0 mt-1">
+                        Payments
+                    </h4>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="mb-4">
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <span class="text-muted">
+                                Total Payments
+                            </span>
+
+                            <i class="bi bi-wallet2 text-success"></i>
+
+                        </div>
+
+                        <h3 class="fw-bold">
+                            @String.Format("{0:N2}", totalPayments)
+                            <small class="fs-6 text-muted">EGP</small>
+                        </h3>
+
+                    </div>
+
+
+                    <hr />
+
+
+                    <div>
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <span class="text-muted">
+                                Total Repair Cost
+                            </span>
+
+                            <i class="bi bi-cash-stack text-primary"></i>
+
+                        </div>
+
+                        <h3 class="fw-bold">
+                            @String.Format("{0:N2}", totalRepairCost)
+                            <small class="fs-6 text-muted">EGP</small>
+                        </h3>
+
+                    </div>
+
+
+                    <a asp-controller="Payments"
+                       asp-action="Index"
+                       class="btn btn-success w-100 mt-4">
+
+                        <i class="bi bi-credit-card"></i>
+                        Manage Payments
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                <div>
+
+                    <small class="text-primary fw-bold">
+                        QUICK ACTIONS
+                    </small>
+
+                    <h4 class="fw-bold mb-0 mt-1">
+                        Manage your repair center
+                    </h4>
+
+                </div>
+
+
+                <div class="d-flex gap-2 flex-wrap">
+
+                    <a asp-controller="Customers"
+                       asp-action="Index"
+                       class="btn btn-outline-primary">
+
+                        <i class="bi bi-people"></i>
+                        Customers
+
+                    </a>
+
+                    <a asp-controller="Devices"
+                       asp-action="Index"
+                       class="btn btn-outline-primary">
+
+                        <i class="bi bi-laptop"></i>
+                        Devices
+
+                    </a>
+
+                    <a asp-controller="RepairOrders"
+                       asp-action="Create"
+                       class="btn btn-primary">
+
+                        <i class="bi bi-plus-circle"></i>
+                        New Repair
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

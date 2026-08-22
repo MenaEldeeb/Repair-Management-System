@@ -1,0 +1,181 @@
+﻿@model FinalProject.Models.Payment
+
+@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Make Payment";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body p-4 p-md-5">
+
+                    <!-- HEADER -->
+
+                    <div class="text-center mb-4">
+
+                        <div class="display-5 text-primary mb-3">
+                            <i class="bi bi-credit-card"></i>
+                        </div>
+
+                        <h2 class="fw-bold">
+                            Make Payment
+                        </h2>
+
+                        <p class="text-muted">
+                            Complete your repair payment.
+                        </p>
+
+                    </div>
+
+
+                    <!-- FORM -->
+
+                    <form asp-controller="CustomerPayment"
+                          asp-action="Create"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+
+                        <!-- REPAIR ORDER -->
+
+                        <input type="hidden"
+                               asp-for="RepairOrderId" />
+
+                        <input type="hidden"
+                               asp-for="Amount" />
+
+
+                        <!-- AMOUNT -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Repair Cost
+                            </label>
+
+                            <div class="input-group input-group-lg">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-cash-stack"></i>
+                                </span>
+
+                                <input type="text"
+                                       class="form-control"
+                                       value="@Model.Amount.ToString("0.00") EGP"
+                                       readonly />
+
+                            </div>
+
+                            <small class="text-muted">
+                                The amount is based on your repair order.
+                            </small>
+
+                        </div>
+
+
+                        <!-- PAYMENT METHOD -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="PaymentMethod"
+                                   class="form-label fw-semibold">
+
+                                Payment Method
+
+                            </label>
+
+                            <select asp-for="PaymentMethod"
+                                    class="form-select form-select-lg">
+
+                                <option value="Cash">
+                                    Cash
+                                </option>
+
+                                <option value="Card">
+                                    Card
+                                </option>
+
+                            </select>
+
+                            <span asp-validation-for="PaymentMethod"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+
+                        <!-- DATE -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Payment Date
+                            </label>
+
+                            <input type="text"
+                                   class="form-control form-control-lg"
+                                   value="@DateTime.Now.ToString("dd/MM/yyyy")"
+                                   readonly />
+
+                        </div>
+
+
+                        <!-- BUTTONS -->
+
+                        <div class="d-grid gap-2">
+
+                            <button type="submit"
+                                    class="btn btn-primary btn-lg">
+
+                                <i class="bi bi-check-circle me-2"></i>
+
+                                Confirm Payment
+
+                            </button>
+
+
+                            <a asp-controller="CustomerRepair"
+                               asp-action="TrackResult"
+                               asp-route-id="@Model.RepairOrderId"
+                               class="btn btn-outline-secondary">
+
+                                <i class="bi bi-arrow-left me-1"></i>
+
+                                Cancel
+
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync(
+            "_ValidationScriptsPartial");
+    }
+
+}
